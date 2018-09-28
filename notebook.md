@@ -12,3 +12,8 @@
 * Set up and worked with libcloud
 * Researched AWS EMR for possible project idea
 * Set up AWS account
+
+# Week Fri 09/21/18 - 09/27/18
+
+* Worked through the REST services section of the epub doc
+* Continued researching AWS EMR for my chapter contribution
