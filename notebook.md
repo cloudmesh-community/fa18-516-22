@@ -17,3 +17,8 @@
 
 * Worked through the REST services section of the epub doc
 * Continued researching AWS EMR for my chapter contribution
+
+# Week Fri 09/28/18 - 10/04/18
+
+* Met with professor over office hours to help get direction on what I should be working on
+* Started working on a section around AWS EMR
