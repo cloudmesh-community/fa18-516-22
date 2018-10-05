@@ -22,4 +22,4 @@
 
 * Met with professor over office hours to help get direction on what I should be working on
 * Started working on a section around AWS EMR
-* Set up the 
+* Set up the README.yml file with information about my chapter and project.
