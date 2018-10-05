@@ -22,3 +22,4 @@
 
 * Met with professor over office hours to help get direction on what I should be working on
 * Started working on a section around AWS EMR
+* Set up the 
