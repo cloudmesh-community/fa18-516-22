@@ -23,3 +23,10 @@
 * Met with professor over office hours to help get direction on what I should be working on
 * Started working on a section around AWS EMR
 * Set up the README.yml file with information about my chapter and project.
+
+# Week Fri 10/05/18 - 10/11/18
+
+* Started researching AWS Livy to contribute to a section.
+* Got set up on AWS CLI (including admin set up).
+* Accessed my AWS account through my Linux VM using AWS CLI.
+* COntinued researching and documenting resources for AWS EMR for my chapter contribution.
