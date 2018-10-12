@@ -7,10 +7,10 @@ owner:
   
 section:
     - title: TBD
-         url: https://github.com/cloudmesh-community/book/chapters/...
+      url: https://github.com/cloudmesh-community/book/chapters/...
 chapter:
     - title: AWS-EMR
-         url: https://github.com/cloudmesh-community/fa18-516-22/blob/master/chapter/AWS-EMR.md         
+      url: https://github.com/cloudmesh-community/fa18-516-22/blob/master/chapter/AWS-EMR.md         
 project:
     - title: Running a Jupyter Notebook Analysis on AWS EMR Utilizing a REST Service
-         url: url in your hid space or that of your partner
+      url: url in your hid space or that of your partner
