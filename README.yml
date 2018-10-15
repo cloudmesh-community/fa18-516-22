@@ -8,6 +8,8 @@ owner:
 section:
     - title: Apache Livy
       url: https://github.com/cloudmesh-community/book/chapters/...
+    - title: Papermill
+      url: https://github.com/cloudmesh-community/book/chapters/...  
 paper:
     - title: AWS-EMR
       url: https://github.com/cloudmesh-community/fa18-516-22/blob/master/chapter/AWS-EMR.md         
