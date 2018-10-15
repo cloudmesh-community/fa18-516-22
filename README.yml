@@ -8,7 +8,7 @@ owner:
 section:
     - title: TBD
       url: https://github.com/cloudmesh-community/book/chapters/...
-chapter:
+paper:
     - title: AWS-EMR
       url: https://github.com/cloudmesh-community/fa18-516-22/blob/master/chapter/AWS-EMR.md         
 project:
