@@ -4,7 +4,6 @@ owner:
   lastname: "Sims"
   hid: "fa18-516-22"
   community: "e516"
-  
 section:
     - title: Apache Livy
       url: https://github.com/cloudmesh-community/book/chapters/...
@@ -12,7 +11,9 @@ section:
       url: https://github.com/cloudmesh-community/book/chapters/...  
 paper:
     - title: AWS-EMR
+      keyword: AWS EMR
       url: https://github.com/cloudmesh-community/fa18-516-22/blob/master/chapter/AWS-EMR.md         
 project:
     - title: Running a Jupyter Notebook Analysis on AWS EMR Utilizing a REST Service
+      keyword: AWS EMR
       url: url in your hid space or that of your partner
