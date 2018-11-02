@@ -1,4 +1,4 @@
-# Amazon Web Services (AWS) Elastic Map Reduce (EMR) :o:
+# AWS Elastic Map Reduce (EMR) :o:
 
 ---
 
@@ -6,8 +6,9 @@
 
 * Learn about EMR
 * Deploy an EMR cluster using:
-- Amazon's Web Interfaces
-- Amazon's Command Line Interface (CLI)
+  - Amazon's Web Interfaces
+  - Amazon's Command Line Interface (CLI)
+* Run a Spark application on an EMR cluster
 
 Amazon EMR provides a managed Hadoop framework that makes big data processing
 - Easy
