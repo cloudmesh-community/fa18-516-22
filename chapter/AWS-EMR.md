@@ -1,4 +1,4 @@
-# AWS Elastic Map Reduce (EMR) :o:
+# AWS Elastic Map Reduce (EMR) {#s-AWS-EMR} :o:
 
 ---
 
@@ -9,6 +9,10 @@
   - Amazon's Web Interfaces
   - Amazon's Command Line Interface (CLI)
 * Run a Spark application on an EMR cluster
+
+## Introduction
+
+[AWS-EMR]{.index} is a data query language developed by Facebook.
 
 Amazon EMR provides a managed Hadoop framework that makes big data processing
 - Easy
