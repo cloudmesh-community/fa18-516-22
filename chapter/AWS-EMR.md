@@ -1,4 +1,13 @@
-# Amazon EMR (Elastic Map Reduce) :o:
+# Amazon Web Services (AWS) Elastic Map Reduce (EMR) :o:
+
+---
+
+**:mortar_board: Learning Objectives**
+
+* Learn about EMR
+* Deploy an EMR cluster using:
+- Amazon's Web Interfaces
+- Amazon's Command Line Interface (CLI)
 
 Amazon EMR provides a managed Hadoop framework that makes big data processing
 - Easy
