@@ -30,3 +30,20 @@
 * Got set up on AWS CLI (including admin set up).
 * Accessed my AWS account through my Linux VM using AWS CLI.
 * COntinued researching and documenting resources for AWS EMR for my chapter contribution.
+
+# Week Fri 10/12/18 - 10/18/18
+
+* Set up an EC2 instance on AWS and tried to get the security set up.
+* Continued researching Apache Livy
+
+# Week Fri 10/19/18 - 10/25/18
+
+* Set up and AWS EMR cluster using only command line interface
+* Set up AWS S3 buckets
+* Created a spark java app and ran on the EMR cluster to test it
+
+# Week Fri 10/26/18 - 11/1/18
+
+* Began pulling together all my documentation to build my chapter and section
+
+
