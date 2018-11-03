@@ -1,3 +1,88 @@
+# AWS Elastic Map Reduce (EMR) :o:
+
+---
+
+**:mortar_board: Learning Objectives**
+
+* Learn about EMR
+* Deploy an EMR cluster using:
+  - Amazon's Command Line Interface (CLI)
+  - Amazon's Web Interfaces
+* Run an example Spark application on an EMR cluster
+
+## Introduction
+
+EMR is an Amazon product that allows for the creation of clusters of Elastic Compute Cloud (EC2) instances. EMR allows user to take advantage of distributed computing capabilities. As the name suggests this product is designed to allow users to easily scale their cluster to meet their computing needs.
+
+EMR clusters can be created through relatively simple web interfaces or can be created through code using CLI. EMR Clusters can be configured for size and can be provisioned with open-source distributed frameworks such as SPARK and HBase.
+
+## Prerequisites
+
+* [AWS Account](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#creating-an-account)
+
+* [AWS Key Pair](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#setting-up-key-pair)
+
+* [Install and Configure AWS CLI](https://github.com/cloudmesh-community/fa18-516-22/blob/master/section/AWS-CLI.md)
+
+* [AWS Admin Access](https://github.com/cloudmesh-community/fa18-516-22/blob/master/section/AWS-Admin-Access.md)
+
+* [Linux Environment](https://github.com/cloudmesh-community/book/blob/master/chapters/linux/linux.md)
+
+## Creating EMR Cluster Using CLI
+
+### Create Security Roles
+In this example we will use the default EMR security roles. These roles enable the nodes within the cluster to access each other and to access other AWS products.
+
+```bash
+aws emr create-default-roles
+```
+
+### Setting up authentication
+In this example we will be using Kerberos for authentication. The Kerberos configuration would allow you to add additional users to your EMR cluster.
+
+Create a json file with the following content and save to a local file:
+```bash
+{
+  "AuthenticationConfiguration": {
+    "KerberosConfiguration": {
+      "Provider": "ClusterDedicatedKdc",
+      "ClusterDedicatedKdcConfiguration": {
+        "TicketLifetimeInHours": 24
+      }
+    }
+  }
+}
+```
+
+Create the Kerberos configuration using the previously created json file:
+```bash
+aws emr create-security-configuration --name "KerberosSecurityConfiguration" --security-configuration file://MyKerberosSecurityConfig.json
+```
+### Determine the applicable subnet
+The EMR cluster will run on a subnet so you need to determine the appropriate subnet for you availability zone. You will need to enter your default zone in the code below.
+
+```bash
+aws ec2 describe-subnets --filters "Name=availabilityZone,Values=us-east-2b"
+```
+The applicable information is returned as the "SubnetId" field.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # AWS Elastic Map Reduce (EMR) {#s-AWS-EMR} :o:
 
 ---
