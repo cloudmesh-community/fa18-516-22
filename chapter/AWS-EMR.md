@@ -160,13 +160,13 @@ Store a text file locally and use the S3 sync function to make it availaable in 
 aws s3 sync your-local-folder-path s3://test-analysis-bucket/SparkTutorial/Input
 ```
 
-### Execute the Spark job on running cluster
+### Execute the Spark job on a running cluster
 Using your cluster id and the paths within your S3 bucket run the following command (this assumes you have a cluster up and running).
 
 ```bash
 aws emr add-steps --cluster-id your-cluster-id --steps Type=Spark,Name=”Spark Program”,ActionOnFailure=CONTINUE,Args=[ — class,test.spark.job.SparkJob,s3://test-analysis-bucket/SparkTutorial/SparkJob-1.0-SNAPSHOT.jar,s3://test-analysis-bucket/SparkTutorial/Input/input.txt,s3://test-analysis-bucket/SparkTutorial/Output]
 ```
-### Execute the Spark while creating clusters
+### Execute the Spark job while creating clusters
 We can also run the same Spark step during the creation of a cluster using the following command (assumes you have already done pre-steps to creating an EMR cluster).
 
 In this case the EMR cluster will spin up, run the Spark job, persist the results to your S3 bucket, and then auto terminate.
