@@ -164,7 +164,12 @@ aws s3 sync your-local-folder-path s3://test-analysis-bucket/SparkTutorial/Input
 Using your cluster id and the paths within your S3 bucket run the following command (this assumes you have a cluster up and running).
 
 ```bash
-aws emr add-steps --cluster-id your-cluster-id --steps Type=Spark,Name=”Spark Program”,ActionOnFailure=CONTINUE,Args=[ — class,test.spark.job.SparkJob,s3://test-analysis-bucket/SparkTutorial/SparkJob-1.0-SNAPSHOT.jar,s3://test-analysis-bucket/SparkTutorial/Input/input.txt,s3://test-analysis-bucket/SparkTutorial/Output]
+aws emr add-steps --cluster-id your-cluster-id \
+--steps Type=Spark,Name=”Spark Program”,ActionOnFailure=CONTINUE, \
+Args=[ — class,test.spark.job.SparkJob, \
+s3://test-analysis-bucket/SparkTutorial/SparkJob-1.0-SNAPSHOT.jar, \
+s3://test-analysis-bucket/SparkTutorial/Input/input.txt, \
+s3://test-analysis-bucket/SparkTutorial/Output]
 ```
 ### Execute the Spark job while creating clusters
 We can also run the same Spark step during the creation of a cluster using the following command (assumes you have already done pre-steps to creating an EMR cluster).
@@ -181,7 +186,11 @@ aws emr create-cluster --name "Test-Kerberized-Spark-Cluster" \
 --security-configuration KerberosSecurityConfiguration \
 --applications Name=Spark \
 --kerberos-attributes Realm=EC2.INTERNAL,KdcAdminPassword=your-password \
---steps Type=Spark,Name="Spark Program",ActionOnFailure=CONTINUE,Args=[--class,test.spark.job.SparkJob,s3://test-analysis-bucket/SparkTutorial/SparkJob-1.0-SNAPSHOT.jar,s3://test-analysis-bucket/SparkTutorial/Input/input.txt,s3://test-analysis-bucket/SparkTutorial/Output] \
+--steps Type=Spark,Name="Spark Program",ActionOnFailure=CONTINUE, \
+Args=[--class,test.spark.job.SparkJob, \
+s3://test-analysis-bucket/SparkTutorial/SparkJob-1.0-SNAPSHOT.jar, \
+s3://test-analysis-bucket/SparkTutorial/Input/input.txt, \
+s3://test-analysis-bucket/SparkTutorial/Output] \
 --auto-terminate
 ```
 ### View the results of the Spark job
