@@ -8,7 +8,7 @@ section:
     - title: AWS-Admin-Access
       url: https://github.com/cloudmesh-community/fa18-516-22/blob/master/section/AWS-Admin-Access.md 
     - title: AWS-CLI
-      https://github.com/cloudmesh-community/fa18-516-22/blob/master/section/AWS-CLI.md
+      url: https://github.com/cloudmesh-community/fa18-516-22/blob/master/section/AWS-CLI.md
 paper:
     - title: AWS-EMR
       keyword: AWS EMR
