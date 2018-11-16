@@ -42,8 +42,17 @@
 * Set up AWS S3 buckets
 * Created a spark java app and ran on the EMR cluster to test it
 
-# Week Fri 10/26/18 - 11/1/18
+# Week Fri 10/26/18 - 11/01/18
 
 * Began pulling together all my documentation to build my chapter and section
+
+# Week Fri 11/02/18 - 11/08/18
+
+* Finished my AWS-EMR chapter
+* Finished two additional sections for the AWS chapter
+
+# Week Fri 11/09/19 - 11/15/18
+
+* Started work on my project API
 
 
