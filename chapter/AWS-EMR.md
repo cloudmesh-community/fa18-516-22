@@ -119,12 +119,11 @@ Click "Create cluster"
 Go to "Advanced Options" and:
 * Select your desired EMR version
 * Select Spark
-* Click "Next"
 * Select your desired instance types
-* Click "Next"
 * For this example deselect the "Logging" option
-* Click "Next"
 * Select your EC2 key Pair
+
+
 * Under "Authentication" select your KerberosSecurityConfiguration
 * Click "Create cluster"
 
@@ -136,9 +135,9 @@ You can view the status of your cluster or termiate the cluster by naviagting to
 ### Spark Job Description
 You can submit Spark steps to a cluster as it is being created or to an already running cluster,
 
-In this example we will execute a simple java function of a text file using Spark on EMR. This is a standard word count application that will return the distinct words in the file along with the count of the number of time the word is present.
+In this example we will execute a simple Python function on a text file using Spark on EMR. This is a standard word count application that will return the distinct words in the file along with the count of the number of times the words are present.
 
-The jar file containing the application will be stored and referenced in a S3 bucket along with the text file being analyzed. The results of the Spark job will be return to the same S3 bucket.
+The Python file containing the application will be stored and referenced in a S3 bucket along with the text file being analyzed. The results of the Spark job will be returned to the same S3 bucket.
 
 ### Creating the S3 bucket
 
@@ -146,10 +145,23 @@ The jar file containing the application will be stored and referenced in a S3 bu
 aws s3 mb s3://test-analysis-bucket --region us-east-2
 ```
 ### Copy files to S3
-Clone the following file to a local folder:
-https://github.com/cloudmesh-community/fa18-516-22/tree/master/chapter/applications
+Create a WordCount.py file with the following code.
 
-You can then sync the folder you stored the jar in to your S3 bucket folder.
+```python
+from __future__ import print_function
+from pyspark import SparkContext
+import sys
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: testjob  ", file=sys.stderr)
+        exit(-1)
+    sc = SparkContext(appName="MyTestJob")
+    dataTextAll = sc.textFile(sys.argv[1])
+    dataRDD = dataTextAll.map(lambda x: x.split(",")).map(lambda y: (str(y[0]), float(y[1]))).reduceByKey(lambda a, b: a + b)
+    dataRDD.saveAsTextFile(sys.argv[2])
+    sc.stop()
+```
+You can then sync the folder you stored .py file in to your S3 bucket folder.
 
 ```bash
 aws s3 sync your-local-folder-path s3://test-analysis-bucket/SparkTutorial
@@ -165,11 +177,13 @@ Using your cluster id and the paths within your S3 bucket run the following comm
 
 ```bash
 aws emr add-steps --cluster-id your-cluster-id \
---steps Type=Spark,Name=”Spark Program”,ActionOnFailure=CONTINUE, \
-Args=[ — class,test.spark.job.SparkJob, \
-s3://test-analysis-bucket/SparkTutorial/SparkJob-1.0-SNAPSHOT.jar, \
-s3://test-analysis-bucket/SparkTutorial/Input/input.txt, \
-s3://test-analysis-bucket/SparkTutorial/Output]
+--steps Type=spark,Name=SparkWordCountApp,\
+Args=[--deploy-mode,cluster,--master,yarn,\
+--conf,spark.yarn.submit.waitAppCompletion=false,\
+--num-executors,2,--executor-cores,2,--executor-memory,1g,\
+s3://your-bucket/SparkTutorial/Python/WordCount.py,\
+s3://your-bucket/SparkTutorial/Python/Input/input.txt,\
+s3://your-bucket/SparkTutorial/Python/Output/]
 ```
 ### Execute the Spark job while creating clusters
 We can also run the same Spark step during the creation of a cluster using the following command (assumes you have already done pre-steps to creating an EMR cluster).
@@ -177,20 +191,24 @@ We can also run the same Spark step during the creation of a cluster using the f
 In this case the EMR cluster will spin up, run the Spark job, persist the results to your S3 bucket, and then auto terminate.
 
 ```bash
-aws emr create-cluster --name "Test-Kerberized-Spark-Cluster" \
+aws emr create-cluster \
+--name "Test-Kerberized-Spark-Cluster" \
 --release-label emr-5.17.0 \
 --instance-type m4.large \
 --instance-count 3 \
 --use-default-roles \
---ec2-attributes KeyName=your-key,SubnetId=your-subnet-id \
+--ec2-attributes KeyName=your-key,SubnetId=subnet-d0169eaa \py
 --security-configuration KerberosSecurityConfiguration \
 --applications Name=Spark \
---kerberos-attributes Realm=EC2.INTERNAL,KdcAdminPassword=your-password \
---steps Type=Spark,Name="Spark Program",ActionOnFailure=CONTINUE, \
-Args=[--class,test.spark.job.SparkJob, \
-s3://test-analysis-bucket/SparkTutorial/SparkJob-1.0-SNAPSHOT.jar, \
-s3://test-analysis-bucket/SparkTutorial/Input/input.txt, \
-s3://test-analysis-bucket/SparkTutorial/Output] \
+--kerberos-attributes Realm=EC2.INTERNAL,KdcAdminPassword=your-pw \
+--steps Type=spark,Name=SparkWordCountApp,\
+Args=[--deploy-mode,cluster,--master,yarn,\
+--conf,spark.yarn.submit.waitAppCompletion=false,\
+--num-executors,2,--executor-cores,2,--executor-memory,1g,\
+s3://your-bucket/SparkTutorial/Python/WordCount.py,\
+s3://your-bucket/SparkTutorial/Python/Input/input.txt,\
+s3://your-bucket/SparkTutorial/Python/Output/],\
+ActionOnFailure=CONTINUE \
 --auto-terminate
 ```
 ### View the results of the Spark job
