@@ -108,7 +108,9 @@ https://us-east-2.console.aws.amazon.com/elasticmapreduce/home?region=us-east-2#
 
 Select the "Security configurations" and click "Create". Give a meaningful name like: "KerberosSecurityConfiguration". Then select "Kerberos" under "Authentication" and click "Create".
 
-![Set up Kerberos](images/EMR-Console-1.png)
+![Set up Kerberos1](images/EMR-Console-1.png)
+
+![Set up Kerberos2](images/EMR-Console-2.png)
 
 ### Create the EMR cluster
 
@@ -118,19 +120,25 @@ https://us-east-2.console.aws.amazon.com/elasticmapreduce/home?region=us-east-2#
 
 Click "Create cluster"
 
-Go to "Advanced Options" and:
+![Create Cluster1](images/EMR-Console-3.png)
+
 * Select your desired EMR version
 * Select Spark
 * Select your desired instance types
 * For this example deselect the "Logging" option
 * Select your EC2 key Pair
 
+![Create Cluster2](images/EMR-Console-4.png)
 
-* Under "Authentication" select your KerberosSecurityConfiguration
+* Under "Advanced Options" select "Security" and then YourKerberosSecurityConfiguration
 * Click "Create cluster"
+
+![Create Cluster3](images/EMR-Console-5.png)
 
 ### View status and terminate EMR cluster
 You can view the status of your cluster or termiate the cluster by naviagting to >Services>EMR>Clusters within the AWS Console.
+
+![Terminate Cluster](images/EMR-Console-6.png)
 
 ## Run an example Spark job on an EMR cluster
 
@@ -221,6 +229,8 @@ Go to the AWS Console (ensure that the URL references your default region)
 https://us-east-2.console.aws.amazon.com/elasticmapreduce/home?region=us-east-2#
 
 Navigate to the S3 bucket and folder you specified for the output.
+
+![View Results](images/EMR-Console-7.png)
 
 ## Conclusion
 AWS EMR is a powerful tool for distributive processing. It is easy to use from wither the command line utilizing AWS CLI or through the AWS Console web interface.
