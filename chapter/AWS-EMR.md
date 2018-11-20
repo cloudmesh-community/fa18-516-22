@@ -108,6 +108,8 @@ https://us-east-2.console.aws.amazon.com/elasticmapreduce/home?region=us-east-2#
 
 Select the "Security configurations" and click "Create". Give a meaningful name like: "KerberosSecurityConfiguration". Then select "Kerberos" under "Authentication" and click "Create".
 
+![Set up Kerberos](images/EMR-Console-1.png)
+
 ### Create the EMR cluster
 
 Go to the AWS Console (ensure that the URL references your default region)
