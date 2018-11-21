@@ -8,8 +8,8 @@ info:
   title: AWS Jupyter/EMR Environment
   contact:
     email: isims@iu.edu
-# host: tbd
-# basePath: /
+host: http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:80
+basePath: /
 tags:
 - name: aws-environments
   description: Spin up the environment
@@ -17,8 +17,8 @@ tags:
   description: Query available notebooks
 - name: results
   description: Query analytical results
-# schemes:
-# - http
+schemes:
+ - http
 paths:
   /emr:
     post:
