@@ -16,4 +16,4 @@ paper:
 project:
     - title: Running a Jupyter Notebook Analysis on AWS EMR Utilizing a REST Service
       keyword: AWS EMR
-      url: url in your hid space or that of your partner
+      url: https://github.com/cloudmesh-community/fa18-516-22/blob/master/project-report/report.md
