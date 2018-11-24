@@ -8,7 +8,7 @@ info:
     name: "Cloudmesh REST Service Example"
   license:
     name: "Apache"
-host: "localhost:8080"
+host: "localhost:80"
 basePath: "/api"
 schemes:
   - "http"
