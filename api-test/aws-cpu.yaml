@@ -8,10 +8,10 @@ info:
     name: "Cloudmesh REST Service Example"
   license:
     name: "Apache"
-host: "localhost:80"
-basePath: "/api"
+host: localhost:80
+basePath: /api
 schemes:
-  - "http"
+  - http
 consumes:
   - "application/json"
 produces:
