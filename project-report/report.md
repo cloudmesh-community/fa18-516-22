@@ -43,13 +43,19 @@ For this project APIs will be hosted on an EC2 instance.
 
 S3 is one of Aamzon's data storage solutions. For this project we will configure an EMR cluster to read/write to an S3 bucket. This bucket would potentially be used for accessing data for analytical purposes and to store log files associated with the cluster. In addition, the Jupyter Hub instance installed on the EMR cluster will store created notebooks on S3. This will allow for terminating the cluster when it is not in use with the ability to retrieve saved notebooks for future use.
 
-### Jupyter Hub
+### JupyterHub
 
-...
+JupyterHub is an open-source project intended to allow a wide range of users to interact with and organize notebooks for analysis. The open-source project describes JupyterHub as follows:
+
+"JupyterHub brings the power of notebooks to groups of users. It gives users access to computational environments and resources without burdening the users with installation and maintenance tasks. Users - including students, researchers, and data scientists - can get their work done in their own workspaces on shared resources which can be managed efficiently by system administrators." [@Misc{fa18-516-22-JupyterHub]
+
+For this project we will build an API that creates an Amazon EMR cluster that includes an installation of JupyterHub.
 
 ## Implemenation
 
-In  this benchmark we will be using  AWS as infrastructure. 
+### Setting up EC2 to host API
+
+
 
 ## Conclusion
 
