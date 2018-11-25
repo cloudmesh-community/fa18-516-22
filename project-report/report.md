@@ -1,4 +1,4 @@
-# Open API Interaction with AWS EMR and Jupyter :hand: fa18-516-22
+# Open API with AWS EMR and Jupyter :hand: fa18-516-22
 
 | Ian Sims
 | isims@iu.edu
