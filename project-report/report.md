@@ -9,13 +9,10 @@
 
 **:mortar_board: Learning Objectives**
 
-
-
-name
-
-## Abstract
-
-TBD
+* a
+* b
+* c
+* d
 
 ## Introduction
 
