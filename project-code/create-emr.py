@@ -9,8 +9,8 @@ def create_emr():
    
    rtn_dict =	{
      "ClusterId": cid,
-     "CheckClusterStatus": paste0("http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8081/emr/get/?", cid),
-     "JupyterHub": paste0("https://", pdns, ":9443"),
+     "CheckClusterStatus": ("http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8081/emr/get/?" + cid),
+     "JupyterHub": ("https://" + pdns + ":9443"),
      "JupyterUN": "jovyan",
      "JupyterPW": "jupyter"
    }
