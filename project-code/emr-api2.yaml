@@ -20,6 +20,12 @@ paths:
   /emr:
     get:
       description: "Returns status of EMR cluster."
+      parameters:
+        - in: path
+          name: cluster_id
+          schema:
+            type: string
+          required: true
       produces:
         - "application/json"
       responses:
