@@ -1,0 +1,44 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: "emrinfo"
+  description: "API to spin up an AWS EMR cluster, to check status, and to terminate."
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    name: "EMR Rest Service"
+  license:
+    name: "Apache"
+host: 18.191.50.79:8080
+basePath: /api
+schemes:
+  - http
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+  /emr:
+    get:
+      description: "Returns status of EMR cluster."
+      produces:
+        - "application/json"
+      parameters:
+      - name: cluster-id
+        in: path
+        required: true
+        type: string
+      responses:
+        "200":
+          description: "EMR info"
+          schema:
+            $ref: "#/definitions/EMR"
+         "404":
+          description: "ID not found"
+definitions:
+  EMR:
+    type: "object"
+    required:
+      - "model"
+    properties:
+      model:
+        type: "string"
