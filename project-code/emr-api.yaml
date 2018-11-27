@@ -7,7 +7,7 @@ info:
   title: "AWS Jupyter/EMR Environment"
   contact:
     email: isims@iu.edu
-host: "localhost:8081"
+host: "localhost:8080"
 basePath: "/api"
 schemes: 
   - "http"
