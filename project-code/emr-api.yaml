@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   description: |
-    API to spin up an AWS EMR cluster, and to query available Jupyter notebooks.
+    API to spin up an AWS EMR cluster, to check status, and to terminate.
     [http://swagger.io](http://swagger.io) or on 
     [irc.freenode.net, #swagger](http://swagger.io/irc/).
   version: 1.0.0
@@ -75,41 +75,9 @@ paths:
             type: string
         404:
           description: ID not found
-  /notebook:
-    delete:
-      tags:
-      - aws-notebooks
-      summary: Delete a notebook
-      operationId: deleteNotebook
-      parameters:
-      - name: notebook-path
-        in: path
-        required: true
-        type: string
-      responses:
-        200:
-          description: successful
-          schema:
-            type: string
-        404:
-          description: ID not found
-    get:
-      tags:
-      - aws-notebooks
-      summary: Get a list of notebooks
-      operationId: getNotebooks
-      produces:
-      - application/json
-      responses:
-        200:
-          description: successful
-          schema:
-            type: string
-        404:
-          description: ID not found
 # Added by API Auto Mocking Plugin
 host: virtserver.swaggerhub.com
-basePath: /Sims-Student/AWS-Environmet-Creation/1.0.0
+basePath: /Sims-Student/AWS-Environment-Creation/1.0.0
 schemes:
  - https
  - http
