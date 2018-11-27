@@ -1,12 +1,12 @@
 import subprocess
-import json
+import boto3
+import time
 
 def create_emr():
    c_id = subprocess.run("aws emr create-cluster --name='E516-JupyterHub-Cluster' --release-label emr-5.19.0 --applications Name=JupyterHub --log-uri s3://e516-jupyterhub-backup/JupyterClusterLogs --use-default-roles --ec2-attributes SubnetIds=subnet-d0169eaa,KeyName=dlec2-key,AdditionalMasterSecurityGroups=['sg-01c1d97ca12d1f2e7'] --instance-count 2 --instance-type m4.large --configurations file://E516-Jupyter-Config.json --output text", shell=True, stdout=subprocess.PIPE)
    cid = c_id.stdout.decode('utf-8')
    cid = cid.rstrip()
-   time.sleep(2)
-
+   
    client = boto3.client('emr')
    pdns = client.describe_cluster(ClusterId=cid)
 
