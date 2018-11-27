@@ -32,7 +32,7 @@ paths:
           description: "EMR info"
           schema:
             $ref: "#/definitions/EMR"
-         "404":
+        "404":
           description: "ID not found"
 definitions:
   EMR:
