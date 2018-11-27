@@ -21,11 +21,11 @@ paths:
     get:
       description: "Returns status of EMR cluster."
       parameters:
-        - in: path
+        - in: query
           name: cluster_id
           schema:
             type: string
-          required: true
+          description: The EMR cluster id
       produces:
         - "application/json"
       responses:
