@@ -6,9 +6,9 @@ def emr_post():
    cid = c_id.stdout.decode('utf-8')
    cid = cid.rstrip()
    
-   rtn_dict =   {
+   rtn_dict = {
      "ClusterId": cid,
-     "CheckClusterStatus": ("http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8081/emr?" + cid)
+     "CheckClusterStatus": ("http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8081/emr?" + cid),
      "TerminateCluster": ('curl -X "DELETE" http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8081/emr?' + cid)
    }
    
