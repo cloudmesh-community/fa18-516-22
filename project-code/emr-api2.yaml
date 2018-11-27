@@ -17,24 +17,19 @@ consumes:
 produces:
   - "application/json"
 paths:
-  /emr:
+  /emr/{cluster_id}:
     get:
-      description: "Returns status of EMR cluster."
+      summary: Returns EMR Cluster Info.
       parameters:
-        - in: query
+        - in: path
           name: cluster_id
-          schema:
-            type: string
-          description: The EMR cluster id
-      produces:
-        - "application/json"
+          required: true
+          type: string
+          minimum: 1
+          description: The cluster id for EMR
       responses:
-        "200":
-          description: "EMR info"
-          schema:
-            $ref: "#/definitions/EMR"
-        "404":
-          description: "ID not found"
+        200:
+          description: OK
 definitions:
   EMR:
     type: "object"
