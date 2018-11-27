@@ -10,3 +10,5 @@ rtn_dict =   {
      "JupyterUN": "jovyan",
      "JupyterPW": "jupyter"
    }
+
+response = client.list_clusters(ClusterStates=['STARTING', 'BOOTSTRAPPING', 'RUNNING', 'WAITING'])
