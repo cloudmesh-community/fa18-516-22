@@ -1,14 +1,27 @@
 import boto3
 
-client = boto3.client('emr')
-pdns = client.describe_cluster(ClusterId=cid)
+def emr_get(cid):
+     
+     client = boto3.client('emr')
+     c_info = client.describe_cluster(ClusterId=cid)
 
-rtn_dict =   {
-     #"ClusterId": cid,
-     #"CheckClusterStatus": ("http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8081/emr/get/?" + cid),
-     #"JupyterHub": ("https://" + response + ":9443"),
-     "JupyterUN": "jovyan",
-     "JupyterPW": "jupyter"
-   }
+     c_status = c_info["Cluster"]["Status"]["State"]
+     if "MasterPublicDnsName" in c_info["Cluster"]:
+          j_hub = ("https://" + c_info["Cluster"]["MasterPublicDnsName"] + ":9443")
+          j_un = "jovyan"
+          j_pw = "jupyter"
+     else:
+          j_hub = ""
+          j_un = ""
+          j_pw = ""
+
+     rtn_dict2 =   {
+          "ClusterId": cid,
+          "JupyterHub": j_hub,
+          "JupyterUN": j_un,
+          "JupyterPW": j_pw
+     }
+     
+     return rtn_dict
 
 response = client.list_clusters(ClusterStates=['STARTING', 'BOOTSTRAPPING', 'RUNNING', 'WAITING'])
