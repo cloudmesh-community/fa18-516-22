@@ -22,11 +22,6 @@ paths:
       description: "Returns status of EMR cluster."
       produces:
         - "application/json"
-      parameters:
-        name: cluster-id
-        in: query
-        required: true
-        type: string
       responses:
         "200":
           description: "EMR info"
