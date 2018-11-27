@@ -15,7 +15,7 @@ def emr_get(cid):
           j_un = ""
           j_pw = ""
 
-     rtn_dict2 =   {
+     rtn_dict = {
           "ClusterId": cid,
           "JupyterHub": j_hub,
           "JupyterUN": j_un,
