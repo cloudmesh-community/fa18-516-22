@@ -23,8 +23,8 @@ paths:
       produces:
         - "application/json"
       parameters:
-      - name: cluster-id
-        in: path
+        name: cluster-id
+        in: query
         required: true
         type: string
       responses:
