@@ -1,11 +1,10 @@
 swagger: '2.0'
 info:
-  description: |
-    API to spin up an AWS EMR cluster, to check status, and to terminate.
+  description: API to spin up an AWS EMR cluster, to check status, and to terminate.
     [http://swagger.io](http://swagger.io) or on 
     [irc.freenode.net, #swagger](http://swagger.io/irc/).
   version: 1.0.0
-  title: AWS Jupyter/EMR Environment
+  title: "AWS Jupyter/EMR Environment"
   contact:
     email: isims@iu.edu
 host: "localhost:8081"
