@@ -19,7 +19,7 @@ def emr_post(num_nodes):
    cid = cid.rstrip()
 
    c_status = "http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8080/api/emr/info/" + cid
-   t_clstr = "curl -X \"DELETE\" http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8080/api/emr/create/" + cid
+   t_clstr = "curl -X \"DELETE\" http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8080/api/emr/terminate/" + cid
 
    rtn_dict = {
       "ClusterId": cid,
