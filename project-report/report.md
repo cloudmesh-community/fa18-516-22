@@ -189,7 +189,7 @@ Install AWS CLI
 ```bash
 $ pip install awscli
 ```
-The following item had to be configured for CLI:
+The following items had to be configured for CLI:
 
 * AWS Access Key ID
 * AWS Secret Access Key
@@ -197,6 +197,116 @@ The following item had to be configured for CLI:
 * Default output format (the default format is json)
 
 ### Create S3 Storage
+
+In order to store analytical data and to backup my Jupyter notebooks I created to S3 buckets using the following commands:
+
+```bash
+$ aws s3 mb s3://e516-analytical-datasets --region us-east-2
+$ aws s3 mb s3://e516-jupyter-backup --region us-east-2
+```
+
+### Codegen Set Up
+
+#### Install Java
+
+I used Codegen to create my rest service and Java ia a requirement. I installed Java using the following commands:
+
+```bash
+$ sudo apt update
+$ sudo apt install default-jre
+$ sudo apt install default-jdk
+```
+
+#### Install Codegen
+
+I ran the following commands for installation:
+
+```bash
+$ mkdir ~/e516/swagger
+$ cd ~/e516/swagger
+$ wget https://oss.sonatype.org/content/repositories/releases/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar
+```
+
+I then opened the .bashrcls file and added an alias for codegen:
+
+```bash
+$ alias swagger-codegen="java -jar ~/e516/swagger/swagger-codegen-cli-2.3.1.jar"
+```
+
+### Building the Rest Service
+
+Using Swagger I build my API specs. This API has POST, DELETE, and GET methods. The POST method will create an AWS EMR cluster and install Jupyter Hub. The DELETE method allows for the termination of the cluster. The GET method retrieves information about the cluster including the status and a link to the Jupyter Hub web ui.
+
+```yaml
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: "emrinfo"
+  description: "API to spin up an AWS EMR cluster, to check status, and to terminate."
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    name: "EMR Rest Service"
+  license:
+    name: "Apache"
+host: 18.191.50.79:8080
+basePath: /api
+schemes:
+  - http
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+  /emr/create/{num_of_nodes}:
+    post:
+      summary: Create EMR cluster.
+      parameters:
+        - in: path
+          name: num_of_nodes
+          required: true
+          type: integer
+          minimum: 1
+          description: The number of nodes in the cluster
+      responses:
+        200:
+          description: OK
+  /emr/info/{cluster_id}:
+    get:
+      summary: Returns EMR cluster Info.
+      parameters:
+        - in: path
+          name: cluster_id
+          required: true
+          type: string
+          minimum: 1
+          description: The cluster id for EMR
+      responses:
+        200:
+          description: OK
+  /emr/terminate/{cluster_id}:
+    delete:
+      summary: Deletes EMR cluster.
+      parameters:
+        - in: path
+          name: cluster_id
+          required: true
+          type: string
+          minimum: 1
+          description: The cluster id for EMR
+      responses:
+        200:
+          description: OK
+definitions:
+  EMR:
+    type: "object"
+    required:
+      - "model"
+    properties:
+      model:
+        type: "string"
+```
+
+
 
 
 
