@@ -17,9 +17,35 @@ consumes:
 produces:
   - "application/json"
 paths:
+  /emr/{num_of_nodes}:
+    post:
+      summary: Create EMR cluster.
+      parameters:
+        - in: path
+          name: num_of_nodes
+          required: true
+          type: integer
+          minimum: 1
+          description: The number of nodes in the cluster
+      responses:
+        200:
+          description: OK
   /emr/{cluster_id}:
     get:
-      summary: Returns EMR Cluster Info.
+      summary: Returns EMR cluster Info.
+      parameters:
+        - in: path
+          name: cluster_id
+          required: true
+          type: string
+          minimum: 1
+          description: The cluster id for EMR
+      responses:
+        200:
+          description: OK
+  /emr/{cluster_id}:
+    delete:
+      summary: Deletes EMR cluster.
       parameters:
         - in: path
           name: cluster_id
