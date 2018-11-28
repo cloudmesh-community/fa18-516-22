@@ -1,11 +1,25 @@
 import subprocess
 
-def emr_post():
-   
-   c_id = subprocess.run("aws emr create-cluster --name='E516-JupyterHub-Cluster' --release-label emr-5.19.0 --applications Name=JupyterHub --log-uri s3://e516-jupyterhub-backup/JupyterClusterLogs --use-default-roles --ec2-attributes SubnetIds=subnet-d0169eaa,KeyName=dlec2-key,AdditionalMasterSecurityGroups=['sg-01c1d97ca12d1f2e7'] --instance-count 2 --instance-type m4.large --configurations file://E516-Jupyter-Config.json --output text", shell=True, stdout=subprocess.PIPE)
+def emr_post(num_nodes):
+
+   aws_cmd = "aws emr create-cluster --name='E516-JupyterHub-Cluster'"
+   aws_cmd = aws_cmd + " --release-label emr-5.19.0"
+   aws_cmd = aws_cmd + " --applications Name=JupyterHub"
+   aws_cmd = aws_cmd + " --log-uri s3://e516-jupyterhub-backup/JupyterClusterLogs"
+   aws_cmd = aws_cmd + " --use-default-roles"
+   aws_cmd = aws_cmd + " --ec2-attributes SubnetIds=subnet-d0169eaa,KeyName=dlec2-key,AdditionalMasterSecurityGroups=['sg-01c1d97ca12d1f2e7']"
+   aws_cmd = aws_cmd + " --instance-count " + num_nodes
+   aws_cmd = aws_cmd + " --instance-type m4.large"
+   aws_cmd = aws_cmd + " --configurations '" + '[{"Classification":"jupyter-s3-conf","'
+   aws_cmd = aws_cmd + '"Properties":{"s3.persistence.bucket":"e516-jupyter-backup",'
+   aws_cmd = aws_cmd + '"s3.persistence.enabled":"true"},"Configurations":[]}]' + "'" + '"'
+   aws_cmd = aws_cmd + " --output text"
+
+   c_id = subprocess.run(aws_cmd, shell=True, stdout=subprocess.PIPE)
+          
    cid = c_id.stdout.decode('utf-8')
    cid = cid.rstrip()
-   
+
    rtn_dict = {
      "ClusterId": cid,
      "CheckClusterStatus": ("http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8080/api/emr?" + cid),
@@ -13,5 +27,6 @@ def emr_post():
    }
    
    return rtn_dict
+
 
 print(create_emr())
