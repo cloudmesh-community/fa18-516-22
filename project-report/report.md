@@ -179,14 +179,8 @@ Now I needed to set up a Python virtual environment for my rest service:
 
 ```bash
 $ pyenv install -l
-```
-```bash
 $ pyenv install 3.6.6
-```
-```bash
 $ pyenv virtualenv 3.6.6 RestService
-```
-```bash
 $ pyenv activate RestService
 ```
 
