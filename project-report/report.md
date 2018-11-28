@@ -53,7 +53,17 @@ For this project we will build an API that creates an Amazon EMR cluster that in
 
 ## Implemenation
 
-### Setting up EC2 to host API
+### Setting up AWS security admin
+
+Once and AWS account has been established [AWS Account](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#creating-an-account), an admin user is needed to interact with various AWS products.
+
+This is done through the AWS console: [AWS IAM](https://console.aws.amazon.com/iam/home?region=us-east-2#/users).
+
+On the users tab click 'Add user':
+
++@fig:aws-emr-1
+![AWS IAM [fa18-516-22-OpenAPI]](images/paper1.png){#fig:aws-emr-1}
+
 
 
 
