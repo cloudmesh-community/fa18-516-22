@@ -91,7 +91,9 @@ Under 'Group Actions', select 'Add Users to Group'
 ![AWS Security [@fa18-516-22-AWS-Security-1]](images/aws-api-1.png){#fig:aws-api-1}
 
 
-### Creating and Configure EC2 Instance to Host API
+### Creating and Configuring EC2 Instance to Host API
+
+#### EC2 Security Group
 
 To set up the EC2 instance for hosting my API I first used the Amazon Console to set up a security group.
 
@@ -112,6 +114,7 @@ I then gave the security group a name, selected the default VPC and added two ru
 
 ![AWS Security [@fa18-516-22-AWS-Security-3]](images/aws-api-3.png){#fig:aws-api-3}
 
+#### EC2 Create Instance
 
 Now it was time to create the EC2 instance using the AWS Console: [Launch EC2](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#Instances:sort=instanceId)
 
@@ -154,8 +157,9 @@ Click 'Select and existing security group' and select the group created earlier:
 
 ![AWS EC2 [@fa18-516-22-AWS-EC2-1]](images/aws-api-8.png){#fig:aws-api-8}
 
-
 You can now review and launch the instance.
+
+#### EC2 SSH
 
 I then went into to my local Linux environment and set up a key pair to enable ssh to my EC2 instance. I did this using CLI and the following commands:
 
@@ -168,6 +172,42 @@ Allow access to the key:
 chmod 400 dlec2-key.pem
 ```
 
+Then locating the 'Public DNS' at: [AWS EC2](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#Instances:sort=instanceId), I connected to the EC2 instance with the following command:
+
+```bash
+ssh -i "dlec2-key.pem" ubuntu@ec2-18-191-50-79.us-east-2.compute.amazonaws.com
+```
+
+#### EC2 Set Up
+
+Now I needed to set up a Python virtual environment for my rest service:
+
+```bash
+pyenv install -l
+```
+```bash
+pyenv install 3.6.6
+```
+```bash
+pyenv virtualenv 3.6.6 RestService
+```
+```bash
+pyenv activate RestService
+```
+
+Install AWS CLI
+
+```bash
+pip install awscli
+```
+The following item had to be configured for CLI:
+
+* AWS Access Key ID
+* AWS Secret Access Key
+* Default region name (this is the default region that will be used when you create EC2 instances)
+* Default output format (the default format is json)
+
+### Create S3 Storage
 
 
 
