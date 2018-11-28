@@ -1,7 +1,7 @@
 import boto3
 
 def emr_get(cid):
-     
+
      client = boto3.client('emr')
      c_info = client.describe_cluster(ClusterId=cid)
 
@@ -22,7 +22,7 @@ def emr_get(cid):
           "JupyterUN": j_un,
           "JupyterPW": j_pw
      }
-     
+ 
      return rtn_dict
 
 response = client.list_clusters(ClusterStates=['STARTING', 'BOOTSTRAPPING', 'RUNNING', 'WAITING'])
