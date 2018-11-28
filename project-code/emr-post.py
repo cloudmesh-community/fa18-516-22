@@ -29,4 +29,4 @@ def emr_post(num_nodes):
    return rtn_dict
 
 
-print(create_emr())
+print(emr_post())
