@@ -60,9 +60,9 @@ Once an AWS account was been established [AWS Account](https://github.com/cloudm
 This is done through the AWS console: [AWS IAM](https://console.aws.amazon.com/iam/home?region=us-east-2#/users).
 
 On the users tab I clicked 'Add user':
-+@fig:aws-emr-1
 
-![AWS IAM [@fa18-516-22-OpenAPI]](images/paper1.png){#fig:aws-emr-1}
++@fig:aws-api-1
+![AWS IAM [@fa18-516-22-OpenAPI]](images/paper1.png){#fig:aws-api-1}
 
 
 
