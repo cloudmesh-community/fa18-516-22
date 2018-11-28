@@ -60,7 +60,7 @@ After setting up an AWS account account: [AWS Account](https://github.com/cloudm
 First I set up a [Linux](https://github.com/cloudmesh-community/book/blob/master/chapters/linux/linux.md) environment using VirtualBox. I then installed [Python](https://github.com/cloudmesh-community/book/blob/master/chapters/prg/python/python-install.md) and [PIP](https://pip.pypa.io/en/stable/installing/) on that environment. Finally I installed CLI using the following Bash command:
 
 ```bash
-pip install awscli
+$ pip install awscli
 ```
 The following item had to be configured for CLI:
 
@@ -74,11 +74,11 @@ The following item had to be configured for CLI:
 In order to work form the command line with various AWS products I had to set up admin access. Using CLI I ran the following commands:
 
 ```bash
-aws iam create-group --group-name Admins
+$ aws iam create-group --group-name Admins
 ```
 
 ```bash
-aws iam attach-group-policy --group-name Admins --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
+$ aws iam attach-group-policy --group-name Admins --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
 ```
 
 Then through the AWS Console I assigned myself to the admin group.
@@ -106,6 +106,7 @@ Select 'Create Security Group'
 
 ![AWS Security [@fa18-516-22-AWS-Security-2]](images/aws-api-2.png){#fig:aws-api-2}
 
+<br><br>
 
 I then gave the security group a name, selected the default VPC and added two rules. One that opens port 8080 for http traffic and one to allow ssh access from my computer. Port 8080 will be used for the API.
 
