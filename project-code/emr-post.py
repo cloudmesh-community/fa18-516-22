@@ -24,9 +24,9 @@ def emr_post(num_nodes):
    t_clstr = "curl -X \"DELETE\" http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8080/api/emr/" + cid
 
    rtn_dict = {
-     "ClusterId": cid,
-     "CheckClusterStatus": c_status,
-     "TerminateCluster": t_clstr
+      "ClusterId": cid,
+      "CheckClusterStatus": c_status,
+      "TerminateCluster": t_clstr
    }
 
    return rtn_dict
