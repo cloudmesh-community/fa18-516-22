@@ -149,5 +149,19 @@ Click 'Select and existing security group' and select the group created earlier:
 
 You can now review and launch the instance.
 
+I then went into to my local Linux environment and set up a key pair to enable ssh to my EC2 instance. I did this using CLI and the following commands:
+
+```bash
+aws ec2 create-key-pair --key-name dlec2-key --query 'KeyMaterial' --output text > dlec2-key.pem
+```
+
+Allow access to the key:
+```bash
+chmod 400 dlec2-key.pem
+```
+
+
+
+
 ## Conclusion
 
