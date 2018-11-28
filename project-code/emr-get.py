@@ -17,6 +17,7 @@ def emr_get(cid):
 
      rtn_dict = {
           "ClusterId": cid,
+          "ClusterStatus": c_status,
           "JupyterHub": j_hub,
           "JupyterUN": j_un,
           "JupyterPW": j_pw
