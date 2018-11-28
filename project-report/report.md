@@ -62,7 +62,11 @@ This is done through the AWS console: [AWS IAM](https://console.aws.amazon.com/i
 On the users tab I clicked 'Add user':
 
 +@fig:aws-api-1
-![AWS IAM [@fa18-516-22-OpenAPI]](images/paper1.png){#fig:aws-api-1}
+[@fa18-516-22-AWS-Security-1]
+
+![AWS Security [@fa18-516-22-AWS-Security-1]](images/aws-api-1.png){#fig:aws-api-1}
+
+
 
 
 
