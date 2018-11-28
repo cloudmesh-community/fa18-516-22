@@ -8,7 +8,7 @@ def emr_post(num_nodes):
    aws_cmd = aws_cmd + " --log-uri s3://e516-jupyterhub-backup/JupyterClusterLogs"
    aws_cmd = aws_cmd + " --use-default-roles"
    aws_cmd = aws_cmd + " --ec2-attributes SubnetIds=subnet-d0169eaa,KeyName=dlec2-key,AdditionalMasterSecurityGroups=['sg-01c1d97ca12d1f2e7']"
-   aws_cmd = aws_cmd + " --instance-count " + num_nodes
+   aws_cmd = aws_cmd + " --instance-count " + str(num_nodes)
    aws_cmd = aws_cmd + " --instance-type m4.large"
    aws_cmd = aws_cmd + " --configurations '" + '[{"Classification":"jupyter-s3-conf","'
    aws_cmd = aws_cmd + '"Properties":{"s3.persistence.bucket":"e516-jupyter-backup",'
