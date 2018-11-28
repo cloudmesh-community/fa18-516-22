@@ -16,7 +16,7 @@ def emr_post(num_nodes):
    aws_cmd = aws_cmd + " --output text"
 
    c_id = subprocess.run(aws_cmd, shell=True, stdout=subprocess.PIPE)
-       
+
    cid = c_id.stdout.decode('utf-8')
    cid = cid.rstrip()
 
