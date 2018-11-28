@@ -21,7 +21,7 @@ Rest API's allow for the creation of services that can interact with multiple ap
 
 Open API is and open source project intended to create a consistent format for creating REST services. Open API descripes this project as:
 
-> "The OpenAPI Initiative (OAI) was created by a consortium of forward-looking industry experts who recognize the immense value of standardizing on how REST APIs are described." [@Misc{fa18-516-22-OpenAPI]
+> "The OpenAPI Initiative (OAI) was created by a consortium of forward-looking industry experts who recognize the immense value of standardizing on how REST APIs are described." [@fa18-516-22-OpenAPI]
 
 ### AWS EMR
 
@@ -35,7 +35,7 @@ For this project we will interact with EMR using an API. This API will allow for
 
 EC2 is an Amazon product that enables cloud computing. Amazon describes this product as:
 
-> "Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure, resizable compute capacity in the cloud. It is designed to make web-scale cloud computing easier for developers." [@Misc{fa18-516-22-AWSEC2]
+> "Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure, resizable compute capacity in the cloud. It is designed to make web-scale cloud computing easier for developers." [@fa18-516-22-AWSEC2]
 
 For this project APIs will be hosted on an EC2 instance.
 
@@ -47,7 +47,7 @@ S3 is one of Aamzon's data storage solutions. For this project we will configure
 
 JupyterHub is an open-source project intended to allow a wide range of users to interact with and organize notebooks for analysis. The open-source project describes JupyterHub as follows:
 
-> "JupyterHub brings the power of notebooks to groups of users. It gives users access to computational environments and resources without burdening the users with installation and maintenance tasks. Users - including students, researchers, and data scientists - can get their work done in their own workspaces on shared resources which can be managed efficiently by system administrators." [@Misc{fa18-516-22-JupyterHub]
+> "JupyterHub brings the power of notebooks to groups of users. It gives users access to computational environments and resources without burdening the users with installation and maintenance tasks. Users - including students, researchers, and data scientists - can get their work done in their own workspaces on shared resources which can be managed efficiently by system administrators." [@fa18-516-22-JupyterHub]
 
 For this project we will build an API that creates an Amazon EMR cluster that includes an installation of JupyterHub.
 
@@ -55,14 +55,14 @@ For this project we will build an API that creates an Amazon EMR cluster that in
 
 ### Setting up AWS security admin
 
-Once and AWS account has been established [AWS Account](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#creating-an-account), an admin user is needed to interact with various AWS products.
+Once an AWS account was been established [AWS Account](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#creating-an-account), I had to add an admin user to interact with various AWS products.
 
 This is done through the AWS console: [AWS IAM](https://console.aws.amazon.com/iam/home?region=us-east-2#/users).
 
-On the users tab click 'Add user':
-
+On the users tab I clicked 'Add user':
 +@fig:aws-emr-1
-![AWS IAM [fa18-516-22-OpenAPI]](images/paper1.png){#fig:aws-emr-1}
+
+![AWS IAM [@fa18-516-22-OpenAPI]](images/paper1.png){#fig:aws-emr-1}
 
 
 
