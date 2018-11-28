@@ -53,9 +53,48 @@ For this project we will build an API that creates an Amazon EMR cluster that in
 
 ## Implemenation
 
-### Setting up AWS security admin
+### Setting up AWS CLI
 
-Once an AWS account was been established [AWS Account](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#creating-an-account), I had to add an admin user to interact with various AWS products.
+After setting up an AWS account account: [AWS Account](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#creating-an-account) and an [AWS Key Pair](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#setting-up-key-pair), I needed to be able to work with AWS products from the command line. To do this I utilized the AWS Command-Line Interface (CLI) from a Linux envirionment.
+
+First I set up a [Linux](https://github.com/cloudmesh-community/book/blob/master/chapters/linux/linux.md) environment using VirtualBox. I then installed [Python](https://github.com/cloudmesh-community/book/blob/master/chapters/prg/python/python-install.md) and [PIP](https://pip.pypa.io/en/stable/installing/) on that environment. Finally I installed CLI using the following Bash command:
+
+```bash
+pip install awscli
+```
+The following item had to be configured for CLI:
+
+* AWS Access Key ID
+* AWS Secret Access Key
+* Default region name (this is the default region that will be used when you create EC2 instances)
+* Default output format (the default format is json)
+
+### Setting up AWS Admin Access
+
+In order to work form the command line with various AWS product I had to set up admin access. Using CLI I ran the following commands:
+
+```bash
+aws iam create-group --group-name Admins
+```
+
+```bash
+aws iam attach-group-policy --group-name Admins --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
+```
+
+Then through the AWS Console I assigned myself to the admin group.
+
+Under 'Group Actions', select 'Add Users to Group'
+
++@fig:aws-api-1
+[@fa18-516-22-AWS-Security-1]
+
+![AWS Security [@fa18-516-22-AWS-Security-1]](images/aws-api-1.png){#fig:aws-api-1}
+
+
+
+
+
+
 
 This is done through the AWS console: [AWS IAM](https://console.aws.amazon.com/iam/home?region=us-east-2#/users).
 
@@ -66,9 +105,12 @@ On the users tab I clicked 'Add user':
 
 ![AWS Security [@fa18-516-22-AWS-Security-1]](images/aws-api-1.png){#fig:aws-api-1}
 
+Give the user a name and click 'Next:Permissions':
 
++@fig:aws-api-2
+[@fa18-516-22-AWS-Security-2]
 
-
+![AWS Security [@fa18-516-22-AWS-Security-2]](images/aws-api-2.png){#fig:aws-api-2}
 
 
 ## Conclusion
