@@ -84,12 +84,13 @@ $ aws iam attach-group-policy --group-name Admins --policy-arn arn:aws:iam::aws:
 Then through the AWS Console I assigned myself to the admin group.
 
 Under 'Group Actions', select 'Add Users to Group'
-<br><br>
+
 +@fig:aws-api-1
+
 [@fa18-516-22-AWS-Security-1]
 
 ![AWS Security [@fa18-516-22-AWS-Security-1]](images/aws-api-1.png){#fig:aws-api-1}
-<br><br>
+
 ### Creating and Configuring EC2 Instance to Host API
 
 #### EC2 Security Group
@@ -99,59 +100,58 @@ To set up the EC2 instance for hosting my API I first used the Amazon Console to
 Navigating to: [EC2 Security Group](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#SecurityGroups:sort=groupId)
 
 Select 'Create Security Group'
-<br><br>
+
 +@fig:aws-api-2
 [@fa18-516-22-AWS-Security-2]
 
 ![AWS Security [@fa18-516-22-AWS-Security-2]](images/aws-api-2.png){#fig:aws-api-2}
-<br><br>
+
 I then gave the security group a name, selected the default VPC and added two rules. One that opens port 8080 for http traffic and one to allow ssh access from my computer. Port 8080 will be used for the API.
-<br><br>
+
 +@fig:aws-api-3
 [@fa18-516-22-AWS-Security-3]
 
 ![AWS Security [@fa18-516-22-AWS-Security-3]](images/aws-api-3.png){#fig:aws-api-3}
-<br><br>
+
 #### EC2 Create Instance
 
 Now it was time to create the EC2 instance using the AWS Console: [Launch EC2](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#Instances:sort=instanceId)
 
 Click the 'Launch Instance' button:
-<br><br>
+
 +@fig:aws-api-4
 [@fa18-516-22-AWS-EC2-1]
 
 ![AWS EC2 [@fa18-516-22-AWS-EC2-1]](images/aws-api-4.png){#fig:aws-api-4}
-<br><br>
+
 Select the Ubuntu version. In this case I used 18.04:
-<br><br>
+
 +@fig:aws-api-5
 [@fa18-516-22-AWS-EC2-1]
 
 ![AWS EC2 [@fa18-516-22-AWS-EC2-1]](images/aws-api-5.png){#fig:aws-api-5}
-<br><br>
+
 Select a small instance type and go to "Next: Configure Instance Details:
-<br><br>
+
 +@fig:aws-api-6
 [@fa18-516-22-AWS-EC2-1]
 
 ![AWS EC2 [@fa18-516-22-AWS-EC2-1]](images/aws-api-6.png){#fig:aws-api-6}
-<br><br>
+
 Make sure the default VPC is selected and then go to 'Configure Security Group':
-<br><br>
+
 +@fig:aws-api-7
 [@fa18-516-22-AWS-EC2-1]
 
 ![AWS EC2 [@fa18-516-22-AWS-EC2-1]](images/aws-api-7.png){#fig:aws-api-7}
-<br><br>
 
 Click 'Select and existing security group' and select the group created earlier:
-<br><br>
+
 +@fig:aws-api-8
 [@fa18-516-22-AWS-EC2-1]
 
 ![AWS EC2 [@fa18-516-22-AWS-EC2-1]](images/aws-api-8.png){#fig:aws-api-8}
-<br><br>
+
 You can now review and launch the instance.
 
 #### EC2 SSH
