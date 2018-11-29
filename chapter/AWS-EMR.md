@@ -24,9 +24,9 @@ EMR clusters can be created through relatively simple web interfaces or can be c
 
 * [AWS Key Pair](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#setting-up-key-pair)
 
-* [Install and Configure AWS CLI](https://github.com/cloudmesh-community/fa18-516-22/blob/master/section/AWS-CLI.md)
+* [Install and Configure AWS CLI](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#aws-command-line-interface)
 
-* [AWS Admin Access](https://github.com/cloudmesh-community/fa18-516-22/blob/master/section/AWS-Admin-Access.md)
+* [AWS Admin Access](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#aws-admin-access)
 
 * [Linux Environment](https://github.com/cloudmesh-community/book/blob/master/chapters/linux/linux.md)
 
