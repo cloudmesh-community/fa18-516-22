@@ -19,7 +19,7 @@
 
 Rest API's allow for the creation of services that can interact with multiple applications. This project will seek to develop an API for interacting with various AWS products. These products include AWS EMR and S3. In addition, these APIs will be hosted on an AWS EC2 instance.
 
-Open API is and open source project intended to create a consistent format for creating REST services. Open API descripes this project as:
+Open API is an open source project intended to create a consistent format for creating REST services. Open API descripes this project as:
 
 > "The OpenAPI Initiative (OAI) was created by a consortium of forward-looking industry experts who recognize the immense value of standardizing on how REST APIs are described." [@fa18-516-22-OpenAPI]
 
