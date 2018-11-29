@@ -55,4 +55,15 @@
 
 * Started work on my project API
 
+# Week Fri 11/16/19 - 11/22/18
+
+* Continued building an API to interact with AWS EMR
+* Added images to my AWS-EMR chapter
+* Created a .bib for my chapter
+
+# Week Fri 11/23/19 - 11/29/18
+
+* Finished my EMR API
+* Completed a significant amount on my project report
+* Started working on an API to interact with S3
 
