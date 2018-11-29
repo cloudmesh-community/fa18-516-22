@@ -1,9 +1,9 @@
-# AWS Admin Access
+## AWS Admin Access
 
-## Introduction
+### Introduction
 In order to access various AWS functionality remotely (through command-line) you must enable administrative access.
 
-## Prerequisites
+### Prerequisites
 
 * [Set up AWS account](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#creating-an-account)
 
@@ -13,15 +13,15 @@ In order to access various AWS functionality remotely (through command-line) you
 
 * [AWS Key Pair](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#setting-up-key-pair)
 
-## Setting up admin access using AWS CLI
+### Setting up admin access using AWS CLI
 
-### Create an admin security group
+#### Create an admin security group
 
 ```bash
 aws iam create-group --group-name Admins
 ```
 
-### Assign a security policy to the created group granting full admin access
+#### Assign a security policy to the created group granting full admin access
 
 ```bash
 aws iam attach-group-policy --group-name Admins --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
