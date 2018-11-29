@@ -1,24 +1,24 @@
-# AWS Command Line Interface (CLI)
+## AWS Command Line Interface (CLI)
 
-## Introduction
+### Introduction
 
 Amazon's CLI allows for programatic interaction with AWS product through the command line. CLI provide many pre-built functions that allow for interaction with Amazon's Elastic Compute Cloud (EC2) instances and S3 storage.
 
-## Prerequisites
+### Prerequisites
 * [Linux](https://github.com/cloudmesh-community/book/blob/master/chapters/linux/linux.md)
 * [Python](https://github.com/cloudmesh-community/book/blob/master/chapters/prg/python/python-install.md)
 * [PIP](https://pip.pypa.io/en/stable/installing/)
 * [AWS Account](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#creating-an-account)
 * [AWS Key Pair](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#setting-up-key-pair)
 
-### Install CLI
+#### Install CLI
 Run the follwoing code to install CLI.
 
 ```bash
 pip install awscli
 ```
 
-### Configure CLI
+#### Configure CLI
 Using the following code to configure AWS using. You will need to specify four parameters:
 
 1. AWS Access Key ID
