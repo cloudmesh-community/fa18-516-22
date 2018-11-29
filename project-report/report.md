@@ -230,12 +230,14 @@ $ wget https://oss.sonatype.org/content/repositories/releases/io/swagger/swagger
 I then opened the .bashrcls file and added an alias for codegen:
 
 ```bash
-$ alias swagger-codegen="java -jar ~/e516/swagger/swagger-codegen-cli-2.3.1.jar"
+alias swagger-codegen="java -jar ~/e516/swagger/swagger-codegen-cli-2.3.1.jar"
 ```
 
-### Building the Rest Service
+### Building the EMR Rest Service
 
-Using Swagger I build my API specs. This API has POST, DELETE, and GET methods. The POST method will create an AWS EMR cluster and install Jupyter Hub. The DELETE method allows for the termination of the cluster. The GET method retrieves information about the cluster including the status and a link to the Jupyter Hub web ui.
+#### Swagger YAML Specs
+
+Using Swagger I built my API specs. This API has POST, DELETE, and GET methods. The POST method will create an AWS EMR cluster and install Jupyter Hub. The DELETE method allows for the termination of the cluster. The GET method retrieves information about the cluster including the status and a link to the Jupyter Hub web ui.
 
 ```yaml
 swagger: "2.0"
@@ -305,6 +307,9 @@ definitions:
       model:
         type: "string"
 ```
+
+#### 
+
 
 
 
