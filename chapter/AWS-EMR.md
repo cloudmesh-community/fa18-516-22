@@ -104,23 +104,38 @@ aws emr terminate-clusters --cluster-ids your-cluster-id
 
 Go to the AWS Console (ensure that the URL references your default region)
 
-https://us-east-2.console.aws.amazon.com/elasticmapreduce/home?region=us-east-2#
+[AWS EMR](https://us-east-2.console.aws.amazon.com/elasticmapreduce/home?region=us-east-2#)
 
 Select the "Security configurations" and click "Create". Give a meaningful name like: "KerberosSecurityConfiguration". Then select "Kerberos" under "Authentication" and click "Create".
 
-![Set up Kerberos1](images/EMR-Console-1.png)
+<br><br>
++@fig:aws-emr-1
+[@fa18-516-22-AWS-EMR-1]
 
-![Set up Kerberos2](images/EMR-Console-2.png)
+![Set up Kerberos 1 [@fa18-516-22-AWS-EMR-1]](images/EMR-Console-1.png){#fig:aws-emr-1}
+<br><br>
+
+<br><br>
++@fig:aws-emr-2
+[@fa18-516-22-AWS-EMR-1]
+
+![Set up Kerberos 2 [@fa18-516-22-AWS-EMR-1]](images/EMR-Console-2.png){#fig:aws-emr-2}
+<br><br>
 
 ### Create the EMR cluster
 
 Go to the AWS Console (ensure that the URL references your default region)
 
-https://us-east-2.console.aws.amazon.com/elasticmapreduce/home?region=us-east-2#
+[AWS EMR](https://us-east-2.console.aws.amazon.com/elasticmapreduce/home?region=us-east-2#)
 
 Click "Create cluster"
 
-![Create Cluster1](images/EMR-Console-3.png)
+<br><br>
++@fig:aws-emr-3
+[@fa18-516-22-AWS-EMR-1]
+
+![Set up EMR 1 [@fa18-516-22-AWS-EMR-1]](images/EMR-Console-3.png){#fig:aws-emr-3}
+<br><br>
 
 * Select your desired EMR version
 * Select Spark
@@ -128,17 +143,32 @@ Click "Create cluster"
 * For this example deselect the "Logging" option
 * Select your EC2 key Pair
 
-![Create Cluster2](images/EMR-Console-4.png)
+<br><br>
++@fig:aws-emr-4
+[@fa18-516-22-AWS-EMR-1]
+
+![Set up EMR 2 [@fa18-516-22-AWS-EMR-1]](images/EMR-Console-4.png){#fig:aws-emr-4}
+<br><br>
 
 * Under "Advanced Options" select "Security" and then YourKerberosSecurityConfiguration
 * Click "Create cluster"
 
-![Create Cluster3](images/EMR-Console-5.png)
+<br><br>
++@fig:aws-emr-4
+[@fa18-516-22-AWS-EMR-1]
+
+![Set up EMR 3 [@fa18-516-22-AWS-EMR-1]](images/EMR-Console-5.png){#fig:aws-emr-5}
+<br><br>
 
 ### View status and terminate EMR cluster
 You can view the status of your cluster or termiate the cluster by naviagting to >Services>EMR>Clusters within the AWS Console.
 
-![Terminate Cluster](images/EMR-Console-6.png)
+<br><br>
++@fig:aws-emr-5
+[@fa18-516-22-AWS-EMR-1]
+
+![Set up EMR 4 [@fa18-516-22-AWS-EMR-1]](images/EMR-Console-6.png){#fig:aws-emr-5}
+<br><br>
 
 ## Run an example Spark job on an EMR cluster
 
@@ -226,11 +256,16 @@ You can use the AWS Console to view the results of the Spark Job.
 
 Go to the AWS Console (ensure that the URL references your default region)
 
-https://us-east-2.console.aws.amazon.com/elasticmapreduce/home?region=us-east-2#
+[AWS Console](https://us-east-2.console.aws.amazon.com/elasticmapreduce/home?region=us-east-2#)
 
 Navigate to the S3 bucket and folder you specified for the output.
 
-![View Results](images/EMR-Console-7.png)
+<br><br>
++@fig:aws-emr-6
+[@fa18-516-22-AWS-EMR-1]
+
+![Set up EMR 5 [@fa18-516-22-AWS-EMR-1]](images/EMR-Console-7.png){#fig:aws-emr-6}
+<br><br>
 
 ## Conclusion
 AWS EMR is a powerful tool for distributive processing. It is easy to use from wither the command line utilizing AWS CLI or through the AWS Console web interface.
