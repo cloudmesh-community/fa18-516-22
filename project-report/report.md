@@ -4,7 +4,7 @@
 | isims@iu.edu
 | Indiana University
 | hid: fa18-516-22
-| github: [:cloud:](https://github.com/cloudmesh-community/fa18-516-22/project-report/report.md)
+| github: [:cloud:](https://github.com/cloudmesh-community/fa18-516-22/blob/master/project-report/report.md)
 | code: [:cloud:](https://github.com/cloudmesh-community/fa18-516-22/project-code/README.md)
 
 **:mortar_board: Learning Objectives**
