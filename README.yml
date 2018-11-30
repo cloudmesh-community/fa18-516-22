@@ -6,14 +6,14 @@ owner:
   community: "e516"
 section:
     - title: AWS-Admin-Access
-      url: https://github.com/cloudmesh-community/fa18-516-22/blob/master/section/AWS-Admin-Access.md 
+      url: https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#aws-admin-access 
     - title: AWS-CLI
-      url: https://github.com/cloudmesh-community/fa18-516-22/blob/master/section/AWS-CLI.md
+      url: https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#aws-command-line-interface
 paper:
     - title: AWS-EMR
       keyword: AWS EMR
-      url: https://github.com/cloudmesh-community/fa18-516-22/blob/master/chapter/AWS-EMR.md         
+      url: https://github.com/cloudmesh-community/book/blob/master/chapters/mapreduce/aws-emr.md       
 project:
-    - title: Running a Jupyter Notebook Analysis on AWS EMR Utilizing a REST Service
+    - title: Open API with AWS EMR and Jupyter
       keyword: AWS EMR
       url: https://github.com/cloudmesh-community/fa18-516-22/blob/master/project-report/report.md
