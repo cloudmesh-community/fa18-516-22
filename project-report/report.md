@@ -27,9 +27,9 @@ Specifically this involves creating an API for the creation of an AWS EMR cluste
 
 The project can be visualized as follows:
 
-+@fig:projectarchitecture shows this projects proposed architecture
++@fig:project-architecture shows this projects proposed architecture
 
-![Project Architecture](images/aws-api-0.png){#fig:projectarchitecture}
+![Project Architecture](images/aws-api-0.png){#fig:project-architecture}
 
 ## Introduction
 
@@ -103,9 +103,9 @@ Then through the [AWS Console](https://console.aws.amazon.com/iam/home?region=us
 
 Under 'Group Actions', select 'Add Users to Group'
 
-+@fig:aws-api-1 shows the AWS Console screen for adding users to a admin security group
++@fig:aws-admin-access shows the AWS Console screen for adding users to a admin security group
 
-![AWS Security [@fa18-516-22-AWS-Security-1]](images/aws-api-1.png){#fig:aws-api-1}
+![AWS Security [@fa18-516-22-AWS-Security-1]](images/aws-api-1.png){#fig:aws-admin-access}
 
 ### Creating and Configuring EC2 Instance to Host API
 
