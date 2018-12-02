@@ -35,6 +35,8 @@ The project architecture can be visualized as follows:
 
 ## Introduction
 
+The following provides a description of the different technolgies and products that were used in the project.
+
 ### Open API
 
 Rest API's allow for the creation of services that can interact with multiple applications. This project will seek to develop an API for interacting with various AWS products. These products include AWS EMR and S3. In addition, these APIs will be hosted on an AWS EC2 instance.
@@ -485,9 +487,255 @@ Using the GET method shows that the cluster has been terminated
 
 #### Deploy S3 Rest Service
 
+This rest service was meant to provide an abstraction layer that can be used by another rest service. This is API provides a simple function to query the contents of an AWS S3 bucket and return the keys to any files that meet a specified file extension type. The Swagger specifications for this API are included below.
 
+```yaml
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: "s3info"
+  description: "API to query S3 bucket by file extension"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    name: "S3 Rest Service"
+  license:
+    name: "Apache"
+host: 18.191.50.79:8081
+basePath: /api
+schemes:
+  - http
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+  /s3:
+    get:
+      summary: Get a list of files and paths with the given file extension
+      parameters:
+        - in: query
+          name: bucket
+          required: true
+          type: string
+          minimum: 1
+          description: The S3 bucket name
+        - in: query
+          name: path
+          required: true
+          type: string
+          minimum: 1
+          description: The folder path to query
+        - in: query
+          name: extension
+          required: true
+          type: string
+          minimum: 1
+          description: The file extension to search for
+      responses:
+        200:
+          description: OK
+definitions:
+  S3:
+    type: "object"
+    required:
+      - "model"
+    properties:
+      model:
+        type: "string"
+```
 
+Similar to the EMR-API we built this API using Swagger Codegen. The same steps were followed with one exceptions. The difference was the need to specify a different port to use for the API. There seems to be a bug in Codegen were the specified port in the yaml file is not used. Codegen defaults to always using port 8080. In order to change the port to allow for mulitple APIs to run on the same EC2 instance, we ran the following code to replace the port number with our desired port (8081). This was done after Codegen was run the needed files were created.
 
+```bash
+$ cd ~/s3-api/
+$ find . -type f -exec sed -i 's/8080/8081/g' {} +
+```
+
+The default_cntroller.py file was then edited with the following Python code. This function used the Amazon 'boto3' package to search a specifed S3 bucket and path for a given file extension. It then returns a list of all files that meet the specifications.
+
+```python
+import boto3
+
+def search_s3_by_ext(bucket, path, extension):
+
+    client = boto3.client('s3')
+    obj = client.list_objects_v2(Bucket=bucket, StartAfter=path )
+
+    rtn_list = []
+    for object in obj['Contents']:
+        if object['Key'][-(len(extension)):] == extension:
+            rtn_list.append(object['Key'])
+
+    return(rtn_list)
+```
+The API could then be deployed using the following.
+
+```bash
+$ cd ~/s3-api/server/s3/flaskConnexion
+$ pip install -r requirements.txt
+$ python setup.py install
+$ python -m swagger_server
+```
+
+The API can be used to query a specified S3 bucket. In the example below we query the S3 bucket 'e561-jupyter-backup' and specify a path for a particular user 'jupyter/jovyan'. We also specify to search for files with an extension of '.ipynb' (notebooks). The service returns a list of files (including the path) that meet the specifications.
+
++@fig:s3-get shows the results of executing the GET method for the S3 API
+
+![S3 API GET](images/aws-api-11.png){#fig:s3-get}
+
+<br>
+
+#### Deploy S3 Rest Service
+
+Our final API is a service that allows for the searching of Jupyter notebook content. This API also connects to the S3 API as an abstraction layer.
+
+Jupyter notebooks allow for custom tagging on individual 'cells'. These tags are saved with the notebook. An example of a 'tag' applied to an individual cell is given below. In this case the tag is called 'parameters'.
+
++@fig:notebook-tag shows an example of a Jupyter notebook tag
+
+![Notebook Tag](images/aws-api-12.png){#fig:notebook-tag}
+
+<br>
+
+Once again we used Swagger for the API specifications. This service has a GET method that accepts parameters for an S3 bucket, a path, and a text field to search for in the notebooks. The Swagger specifications are provided below.
+
+```yaml
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: "notebookinfo"
+  description: "API to query jupyter notebook parameters"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    name: "Notebook Rest Service"
+  license:
+    name: "Apache"
+host: 18.191.50.79:8082
+basePath: /api
+schemes:
+  - http
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+  /notebook:
+    get:
+      summary: Get a list of files and paths with the given file extension
+      parameters:
+        - in: query
+          name: bucket
+          required: true
+          type: string
+          minimum: 1
+          description: The S3 bucket name
+        - in: query
+          name: path
+          required: true
+          type: string
+          minimum: 1
+          description: The folder path to query notebooks
+        - in: query
+          name: search_on
+          required: true
+          type: string
+          minimum: 1
+          description: The parameter text to look for
+      responses:
+        200:
+          description: OK
+definitions:
+  NOTEBOOK:
+    type: "object"
+    required:
+      - "model"
+    properties:
+      model:
+        type: "string"
+```
+
+Codegen was used to generate the needed files and the default_controller.py file was edited to include the following Python code. This function uses the Python library 'requests' to call our S3 API. The S3 API provides a list of .ipynb files in the specifed bucket and path. We then loop through that list and search each cell to see if there is a 'parameter' tag. If there is a 'parameter' tag the specified search value is looked for in the cell's source code. The function returns a list of all the unique notebooks that contain the specified text in any 'parameter' cell.
+
+```python
+import boto3
+import json
+import requests
+
+def search_nb_param_inpt_data(bucket, path, search_on):
+
+    #call s3 API to get list of files including paths
+    url = 'http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8081/api/s3'
+    payload = {'bucket': bucket, 'path': path, 'extension': '.ipynb'}
+    r = requests.get(url, params=payload)
+
+    s3 = boto3.resource('s3')
+
+    #loop through all .ipynb under path
+    nb_has_val = False
+    nbs_found = []
+    for file_path in r.json():
+
+        content_object = s3.Object(bucket, file_path)
+        file_content = content_object.get()['Body'].read().decode('utf-8')
+        json_content = json.loads(file_content)
+
+        #loop through each cell of nb
+        for cell in json_content['cells']:
+            if 'source' in cell:
+                if 'metadata' in cell:
+                    if 'tags' in cell['metadata']:
+                        if 'parameters' in cell['metadata']['tags']:
+                            if search_on in cell['source']:
+                                nbs_found.append('s3://' + bucket + '/' + file_path)
+
+    rtn_nb_full_path_list = list(set(nbs_found))
+
+    return(rtn_nb_full_path_list)
+```
+Again we needed to specify a different port (8082) with the following code.
+
+```bash
+$ cd ~/s3-api/
+$ find . -type f -exec sed -i 's/8080/8082/g' {} +
+```
+
+The API could then be deployed using the following.
+
+```bash
+$ cd ~/notebook-api/server/notebook/flaskConnexion
+$ pip install -r requirements.txt
+$ python setup.py install
+$ python -m swagger_server
+```
+
+The API can be used to query the contents of Jupyter notebooks. In the example below we query the S3 bucket 'e561-jupyter-backup' and specify a path of 'jupyter'. We also specify to search the parameter cells for 'test1/iris.csv'. This text relates to a dataset that is stored on S3. In this way a user could query a set of analytical notebooks to see who is perforiming ananlysis using a particular dataset. The service returns a list of files (including the path) that meet the specifications.
+
++@fig:notebook-get shows the results of executing the GET method for the Notebook API
+
+![Notebook API GET](images/aws-api-13.png){#fig:notebook-get}
+
+<br>
+
+#### Running all APIs
+
+In order to have all three of these Rest services running on the same EC2 instance. The following commands were run. The '&" returns to the prompt after each service is deployed.
+
+```bash
+$ cd ~/emr-api/server/emr/flaskConnexion
+$ python -m swagger_server &
+$ cd ~/s3-api/server/s3/flaskConnexion
+$ python -m swagger_server &
+$ cd ~/notebook-api/server/notebook/flaskConnexion
+$ python -m swagger_server &
+```
+
+The services can be terminated with the following command.
+
+```bash
+$ pkill -f swagger
+```
 
 ## Conclusion
+
+This project results in a usable Jupyter notebook environment that is scalable over time. The intial APIs lay a foundation for a robust notebook environment in which a user can create analytical processes and search for existing ones.
 
