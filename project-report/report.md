@@ -35,7 +35,7 @@ The project architecture can be visualized as follows:
 
 ## Introduction
 
-The following provides a description of the different technolgies and products that were used in the project.
+The following provides a description of the different technologies and products that were used in the project.
 
 ### Open API
 
