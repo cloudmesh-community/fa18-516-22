@@ -18,7 +18,7 @@ produces:
   - "application/json"
 paths:
   /s3/{bucket}/folder/{path}/file/{extension}:
-    post:
+    get:
       summary: Create EMR cluster.
       parameters:
         - in: path
