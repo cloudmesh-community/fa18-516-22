@@ -9,3 +9,5 @@ def search_s3_by_ext(bucket, path, extension):
     for object in obj['Contents']:
         if object['Key'][-(len(file_extension)):] == file_extension:
             rtn_list.append(object['Key'])
+
+    return(rtn_list)
