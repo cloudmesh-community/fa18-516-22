@@ -400,6 +400,59 @@ def emr_post(num_nodes):
    return rtn_dict
 ```
 
+The DELETE method accepts an EMR cluster ID as an input and then terminates the specified EMR cluster. It returns a dictionary containing the cluster ID, the current status of the cluster, and the url for using the GET method to check the status of the cluster.
+
+```python
+import subprocess
+
+def emr_delete(cid):
+
+     subprocess.run("aws emr terminate-clusters --cluster-ids " + cid, shell=True)
+
+     c_status = ("http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8080/api/emr/info/" + cid)
+
+     rtn_dict =   {
+         "ClusterId": cid,
+         "Status": "TERMINATING",
+         "CheckClusterStatus": c_status
+     }
+
+     return rtn_dict
+ ```
+ 
+The GET method allows a use to query information about the EMR cluster. The method accepts a cluster ID as an input and returns a dictionary containing the cluster ID, the cluster status, a link to access the JupyterHub UI, as well as the default username and password for JupyterHub.
+
+This function utilizes the Python library 'boto3'. This is a library created by Amazon to interact with AWS products with Python directly.
+ 
+ ```python
+import boto3
+
+def emr_get(cid):
+
+     client = boto3.client('emr')
+     c_info = client.describe_cluster(ClusterId=cid)
+
+     c_status = c_info["Cluster"]["Status"]["State"]
+     if "MasterPublicDnsName" in c_info["Cluster"]:
+          j_hub = ("https://" + c_info["Cluster"]["MasterPublicDnsName"] + ":9443")
+          j_un = "jovyan"
+          j_pw = "jupyter"
+     else:
+          j_hub = ""
+          j_un = ""
+          j_pw = ""
+
+     rtn_dict = {
+          "ClusterId": cid,
+          "ClusterStatus": c_status,
+          "JupyterHub": j_hub,
+          "JupyterUN": j_un,
+          "JupyterPW": j_pw
+     }
+
+     return rtn_dict
+```
+
 
 
 
