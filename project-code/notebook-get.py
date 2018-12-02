@@ -4,8 +4,6 @@ import requests
 
 def search_nb_param_inpt_data(bucket, path, search_on):
 
-    path = path.replace('/', '%2f')
-
     #call s3 API to get list of files including paths
     url = 'http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8081/api/s3'
     payload = {'bucket': bucket, 'path': path, 'extension': '.ipynb'}
