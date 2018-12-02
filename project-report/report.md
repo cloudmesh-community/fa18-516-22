@@ -31,8 +31,6 @@ The project architecture can be visualized as follows:
 
 ![Project Architecture](images/aws-api-0.png){#fig:project-architecture}
 
-<br>
-
 ## Introduction
 
 The following provides a description of the different technologies and products that were used in the project.
@@ -109,8 +107,6 @@ Then through the [AWS Console](https://console.aws.amazon.com/iam/home?region=us
 
 ![AWS Security [@fa18-516-22-AWS-Security-1]](images/aws-api-1.png){#fig:aws-admin-access}
 
-<br>
-
 ### Creating and Configuring EC2 Instance to Host API
 
 #### EC2 Security Group
@@ -123,15 +119,12 @@ Navigating to: [EC2 Security Group](https://us-east-2.console.aws.amazon.com/ec2
 
 ![AWS Security [@fa18-516-22-AWS-Security-2]](images/aws-api-2.png){#fig:aws-create-security-groups}
 
-<br>
 
 We then gave the security group a name, selected the default VPC and added two rules. One that opens ports 8080, 8081, and 8082 for http traffic and one to allow ssh access from a single ip. Ports 8080, 8081, and 8082 will be used for accessing the APIs.
 
 +@fig:aws-define-security-group shows the AWS screen for defining a security group
 
 ![AWS Security [@fa18-516-22-AWS-Security-3]](images/aws-api-3.png){#fig:aws-define-security-group}
-
-<br>
 
 #### EC2 Create Instance
 
@@ -141,15 +134,11 @@ Now it was time to create an EC2 instance using the AWS Console: [Launch EC2](ht
 
 ![AWS EC2 [@fa18-516-22-AWS-EC2-1]](images/aws-api-4.png){#fig:launch-ec2}
 
-<br>
-
 We selected the Ubuntu version, using version 18.04:
 
 +@fig:ec2-define-os shows the AWS screen used for selecting an EC2 operating system
 
 ![AWS EC2 OS [@fa18-516-22-AWS-EC2-1]](images/aws-api-5.png){#fig:ec2-define-os}
-
-<br>
 
 We selected a small instance type and went to "Next: Configure Instance Details.
 
@@ -157,23 +146,17 @@ We selected a small instance type and went to "Next: Configure Instance Details.
 
 ![AWS EC2 Type [@fa18-516-22-AWS-EC2-1]](images/aws-api-6.png){#fig:ec2-select-type}
 
-<br>
-
 We made sure the default VPC is selected and then went to 'Configure Security Group'.
 
 +@fig:ec2-configure-security shows the AWS Console screen for confirguring securty on an EC2 instance
 
 ![AWS EC2 Security Config [@fa18-516-22-AWS-EC2-1]](images/aws-api-7.png){#fig:ec2-configure-security}
 
-<br>
-
 We clicked 'Select and existing security group' and selected the group created earlier.
 
 +@fig:ec2-select-security shows the AWS Console screen for selecting a security group for EC2
 
 ![AWS EC2 Security Select [@fa18-516-22-AWS-EC2-1]](images/aws-api-8.png){#fig:ec2-select-security}
-
-<br>
 
 The EC2 instance could then be launched.
 
@@ -462,8 +445,6 @@ The CheckClusterStatus url can then be used in a web browser to check the cluste
 
 ![EMR API GET](images/aws-api-9.png){#fig:emr-get-output}
 
-<br>
-
 Once the cluster is started, the JupyterHub web interface can be accessed through the given url. The EMR API configured the cluster to store created notebook to S3, so when the cluster is terminated the notebooks will still be persisted. In addition, each time the POST method is used to create an EMR cluster any persisted notebooks will be available to the user in JupyterHub.
 
 The DELETE method can be used in a curl command to terminate the cluster.
@@ -482,8 +463,6 @@ Using the GET method shows that the cluster has been terminated
 +@fig:emr-get-output-results shows the results of executing the GET method for the EMR API
 
 ![EMR API GET Results](images/aws-api-10.png){#fig:emr-get-output-results}
-
-<br>
 
 ### Deploy S3 Rest Service
 
@@ -583,8 +562,6 @@ The API can be used to query a specified S3 bucket. In the example below we quer
 
 ![S3 API GET](images/aws-api-11.png){#fig:s3-get}
 
-<br>
-
 ### Deploy Notebook Rest Service
 
 Our final API is a service that allows for the searching of Jupyter notebook content. This API also connects to the S3 API as an abstraction layer.
@@ -594,8 +571,6 @@ Jupyter notebooks allow for custom tagging on individual 'cells'. These tags are
 +@fig:notebook-tag shows an example of a Jupyter notebook tag
 
 ![Notebook Tag](images/aws-api-12.png){#fig:notebook-tag}
-
-<br>
 
 Once again we used Swagger for the API specifications. This service has a GET method that accepts parameters for an S3 bucket, a path, and a text field to search for in the notebooks. The Swagger specifications are provided below.
 
@@ -713,8 +688,6 @@ The API can be used to query the contents of Jupyter notebooks. In the example b
 +@fig:notebook-get shows the results of executing the GET method for the Notebook API
 
 ![Notebook API GET](images/aws-api-13.png){#fig:notebook-get}
-
-<br>
 
 ### Running all APIs
 
