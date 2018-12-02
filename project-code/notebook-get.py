@@ -30,7 +30,7 @@ def search_nb_param_inpt_data(bucket, path, search_on):
                         if 'parameters' in cell['metadata']['tags']:
                             if search_on in cell['source']:
                                 nbs_found.append('s3://' + bucket + '/' + file_path)
-                            
+
     rtn_nb_full_path_list = list(set(nbs_found))
 
     return(rtn_nb_full_path_list)
