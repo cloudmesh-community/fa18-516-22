@@ -17,23 +17,23 @@ consumes:
 produces:
   - "application/json"
 paths:
-  /s3/{bucket}/folder/{path}/file/{extension}:
+  /s3:
     get:
       summary: Get a list of files and paths with the given file extension
       parameters:
-        - in: path
+        - in: query
           name: bucket
           required: true
           type: string
           minimum: 1
           description: The S3 bucket name
-        - in: path
+        - in: query
           name: path
           required: true
           type: string
           minimum: 1
           description: The folder path to query
-        - in: path
+        - in: query
           name: extension
           required: true
           type: string
