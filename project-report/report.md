@@ -21,11 +21,11 @@ Keywords: AWS, Open API, EC2, EMR, Jupyter, S3
 
 ## Abstract
 
-The goal of this project is to create a cloud environment to facilitate analytical work at scale. This includes creating an API to facilitat the creation of an analytical environment as well as APIs to aid a user in determining the types of analytical processes that already exist.
+The goal of this project is to create an AWS cloud environment to facilitate analytical work at scale. This includes creating an API to facilitate the creation of an analytical environment as well as APIs to aid a user in determining the types of analytical processes that already exist.
 
-Specifically this involves creating an API for the creation of an AWS EMR cluster and APIs to give the ability to determine available analytical datasets on AWS S3. Finally, we will create an API that interacts with the S3 API and gives the abilty to parse through Jupyter notebook files to determine which analytical processes utilize a given dataset.
+Specifically, this project involves building an API for the creation of an AWS EMR cluster and APIs to give users the ability to determine available analytical datasets on AWS S3. Finally, we will create an API that interacts with the S3 API and gives the abilty to parse through Jupyter notebook files to determine which analytical processes utilize a given dataset.
 
-The project can be visualized as follows:
+The project architecture can be visualized as follows:
 
 +@fig:project-architecture shows this projects proposed architecture
 
