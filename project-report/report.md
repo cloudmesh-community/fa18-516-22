@@ -101,7 +101,7 @@ $ aws iam attach-group-policy --group-name Admins --policy-arn arn:aws:iam::aws:
 
 Then through the [AWS Console](https://console.aws.amazon.com/iam/home?region=us-east-2#/groups) we assigned users to the admin group.
 
-Under 'Group Actions', select 'Add Users to Group'
+**Under 'Group Actions', select 'Add Users to Group'**
 
 +@fig:aws-admin-access shows the AWS Console screen for adding users to a admin security group
 
@@ -115,7 +115,7 @@ To set up the EC2 instance for hosting our APIs we first used the Amazon Console
 
 Navigating to: [EC2 Security Group](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#SecurityGroups:sort=groupId)
 
-Select 'Create Security Group'
+**Select 'Create Security Group'**
 
 +@fig:aws-create-security-groups shows the screen to create an AWS security group
 
