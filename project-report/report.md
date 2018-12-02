@@ -487,7 +487,7 @@ Using the GET method shows that the cluster has been terminated
 
 #### Deploy S3 Rest Service
 
-This rest service was meant to provide an abstraction layer that can be used by another rest service. This is API provides a simple function to query the contents of an AWS S3 bucket and return the keys to any files that meet a specified file extension type. The Swagger specifications for this API are included below.
+This rest service was meant to provide an abstraction layer that can be used by another rest service. This API provides a simple function to query the contents of an AWS S3 bucket and return the keys to any files that meet a specified file extension type. The Swagger specifications for this API are included below.
 
 ```yaml
 swagger: "2.0"
