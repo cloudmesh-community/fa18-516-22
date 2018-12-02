@@ -99,9 +99,7 @@ $ aws iam create-group --group-name Admins
 $ aws iam attach-group-policy --group-name Admins --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
 ```
 
-Then through the [AWS Console](https://console.aws.amazon.com/iam/home?region=us-east-2#/groups) we assigned users to the admin group.
-
-**Under 'Group Actions', select 'Add Users to Group'**
+Then through the [AWS Console](https://console.aws.amazon.com/iam/home?region=us-east-2#/groups) we assigned users to the admin group. Under 'Group Actions', we selected 'Add Users to Group'.
 
 +@fig:aws-admin-access shows the AWS Console screen for adding users to a admin security group
 
@@ -113,9 +111,7 @@ Then through the [AWS Console](https://console.aws.amazon.com/iam/home?region=us
 
 To set up the EC2 instance for hosting our APIs we first used the Amazon Console to set up a security group.
 
-Navigating to: [EC2 Security Group](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#SecurityGroups:sort=groupId)
-
-**Select 'Create Security Group'**
+Navigating to: [EC2 Security Group](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#SecurityGroups:sort=groupId) we selected 'Create Security Group'
 
 +@fig:aws-create-security-groups shows the screen to create an AWS security group
 
@@ -129,33 +125,31 @@ We then gave the security group a name, selected the default VPC and added two r
 
 #### EC2 Create Instance
 
-Now it was time to create an EC2 instance using the AWS Console: [Launch EC2](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#Instances:sort=instanceId)
-
-We clicked the 'Launch Instance' button:
+Now it was time to create an EC2 instance using the AWS Console: [Launch EC2](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#Instances:sort=instanceId). We clicked the 'Launch Instance' button.
 
 +@fig:launch-ec2 shows the AWS Console screen for launching an EC2 instance
 
 ![AWS EC2 [@fa18-516-22-AWS-EC2-1]](images/aws-api-4.png){#fig:launch-ec2}
 
-We selected the Ubuntu version. We used version 18.04:
+We selected the Ubuntu version, using version 18.04:
 
 +@fig:ec2-define-os shows the AWS screen used for selecting an EC2 operating system
 
 ![AWS EC2 OS [@fa18-516-22-AWS-EC2-1]](images/aws-api-5.png){#fig:ec2-define-os}
 
-We selected a small instance type and went to "Next: Configure Instance Details:
+We selected a small instance type and went to "Next: Configure Instance Details.
 
 +@fig:ec2-select-type shows the AWS Console screen for selecting the type of instance
 
 ![AWS EC2 Type [@fa18-516-22-AWS-EC2-1]](images/aws-api-6.png){#fig:ec2-select-type}
 
-We made sure the default VPC is selected and then went to 'Configure Security Group':
+We made sure the default VPC is selected and then went to 'Configure Security Group'.
 
 +@fig:ec2-configure-security shows the AWS Console screen for confirguring securty on an EC2 instance
 
 ![AWS EC2 Security Config [@fa18-516-22-AWS-EC2-1]](images/aws-api-7.png){#fig:ec2-configure-security}
 
-Clicked 'Select and existing security group' and selected the group created earlier:
+We clicked 'Select and existing security group' and selected the group created earlier.
 
 +@fig:ec2-select-security shows the AWS Console screen for selecting a security group for EC2
 
