@@ -485,7 +485,7 @@ Using the GET method shows that the cluster has been terminated
 
 <br>
 
-#### Deploy S3 Rest Service
+### Deploy S3 Rest Service
 
 This rest service was meant to provide an abstraction layer that can be used by another rest service. This API provides a simple function to query the contents of an AWS S3 bucket and return the keys to any files that meet a specified file extension type. The Swagger specifications for this API are included below.
 
@@ -585,7 +585,7 @@ The API can be used to query a specified S3 bucket. In the example below we quer
 
 <br>
 
-#### Deploy Notebook Rest Service
+### Deploy Notebook Rest Service
 
 Our final API is a service that allows for the searching of Jupyter notebook content. This API also connects to the S3 API as an abstraction layer.
 
@@ -716,7 +716,7 @@ The API can be used to query the contents of Jupyter notebooks. In the example b
 
 <br>
 
-#### Running all APIs
+### Running all APIs
 
 In order to have all three of these Rest services running on the same EC2 instance. The following commands were run. The '&" returns to the prompt after each service is deployed.
 
