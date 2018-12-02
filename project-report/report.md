@@ -7,11 +7,29 @@
 | github: [:cloud:](https://github.com/cloudmesh-community/fa18-516-22/blob/master/project-report/report.md)
 | code: [:cloud:](https://github.com/cloudmesh-community/fa18-516-22/project-code/README.md)
 
+---
+
+Keywords: AWS, Open API, EC2, EMR, Jupyter, S3
+
+---
+
 **:mortar_board: Learning Objectives**
 
 * Use an Open API to interact with various AWS products
 * Learn to deploy an AWS EMR Cluster
 * Interact with Jupyter notebooks stored in S3 buckets
+
+## Abstract
+
+The goal of this project is to create a cloud environment to facilitate analytical work at scale. This includes creating an API to facilitat the creation of an analytical environment as well as APIs to aid a user in determining the types of analytical processes that already exist.
+
+Specifically this involves creating an API for the creation of an AWS EMR cluster and APIs to give the ability to determine available analytical datasets on AWS S3. Finally, we will create an API that interacts with the S3 API and gives the abilty to parse through Jupyter notebook files to determine which analytical processes utilize a given dataset.
+
+The project can be visualized as follows:
+
++@fig:projectarchitecture shows this projects proposed architecture
+
+![Project Architecture](images/aws-api-0.png){#fig:projectarchitecture}
 
 ## Introduction
 
@@ -55,9 +73,9 @@ For this project we will build an API that creates an Amazon EMR cluster that in
 
 ### Setting up AWS CLI
 
-After setting up an AWS account account: [AWS Account](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#creating-an-account) and an [AWS Key Pair](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#setting-up-key-pair), I needed to be able to work with AWS products from the command line. To do this I utilized the AWS Command-Line Interface (CLI) from a Linux envirionment.
+After setting up an AWS account account: [AWS Account](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#creating-an-account) and an [AWS Key Pair](https://github.com/cloudmesh-community/book/blob/master/chapters/iaas/aws/aws.md#setting-up-key-pair), we needed to be able to work with AWS products from the command line. To do this we utilized the AWS Command-Line Interface (CLI) from a Linux envirionment.
 
-First I set up a [Linux](https://github.com/cloudmesh-community/book/blob/master/chapters/linux/linux.md) environment using VirtualBox. I then installed [Python](https://github.com/cloudmesh-community/book/blob/master/chapters/prg/python/python-install.md) and [PIP](https://pip.pypa.io/en/stable/installing/) on that environment. Finally I installed CLI using the following Bash command:
+First we set up a [Linux](https://github.com/cloudmesh-community/book/blob/master/chapters/linux/linux.md) environment using VirtualBox. We then installed [Python](https://github.com/cloudmesh-community/book/blob/master/chapters/prg/python/python-install.md) and [PIP](https://pip.pypa.io/en/stable/installing/) on that environment. Finally we installed CLI using the following Bash command:
 
 ```bash
 $ pip install awscli
@@ -71,7 +89,7 @@ The following item had to be configured for CLI:
 
 ### Setting up AWS Admin Access
 
-In order to work form the command line with various AWS products I had to set up admin access. Using CLI I ran the following commands:
+In order to work from the command line with various AWS products we had to set up admin access. Using CLI we ran the following commands:
 
 ```bash
 $ aws iam create-group --group-name Admins
@@ -81,13 +99,11 @@ $ aws iam create-group --group-name Admins
 $ aws iam attach-group-policy --group-name Admins --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
 ```
 
-Then through the AWS Console I assigned myself to the admin group.
+Then through the [AWS Console](https://console.aws.amazon.com/iam/home?region=us-east-2#/groups) we assigned users to the admin group.
 
 Under 'Group Actions', select 'Add Users to Group'
 
-+@fig:aws-api-1
-
-[@fa18-516-22-AWS-Security-1]
++@fig:aws-api-1 shows the AWS Console screen for adding users to a admin security group
 
 ![AWS Security [@fa18-516-22-AWS-Security-1]](images/aws-api-1.png){#fig:aws-api-1}
 
@@ -95,79 +111,72 @@ Under 'Group Actions', select 'Add Users to Group'
 
 #### EC2 Security Group
 
-To set up the EC2 instance for hosting my API I first used the Amazon Console to set up a security group.
+To set up the EC2 instance for hosting our APIs we first used the Amazon Console to set up a security group.
 
 Navigating to: [EC2 Security Group](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#SecurityGroups:sort=groupId)
 
 Select 'Create Security Group'
 
-+@fig:aws-api-2
-[@fa18-516-22-AWS-Security-2]
++@fig:aws-create-security-groups shows the screen to create an AWS security group
 
-![AWS Security [@fa18-516-22-AWS-Security-2]](images/aws-api-2.png){#fig:aws-api-2}
+![AWS Security [@fa18-516-22-AWS-Security-2]](images/aws-api-2.png){#fig:aws-create-security-groups}
 
-I then gave the security group a name, selected the default VPC and added two rules. One that opens port 8080 for http traffic and one to allow ssh access from my computer. Port 8080 will be used for the API.
+We then gave the security group a name, selected the default VPC and added two rules. One that opens ports 8080, 8081, and 8082 for http traffic and one to allow ssh access from a single ip. Ports 8080, 8081, and 8082 will be used for accessing the APIs.
 
-+@fig:aws-api-3
-[@fa18-516-22-AWS-Security-3]
++@fig:aws-define-security-group shows the AWS screen for defining a security group
 
-![AWS Security [@fa18-516-22-AWS-Security-3]](images/aws-api-3.png){#fig:aws-api-3}
+![AWS Security [@fa18-516-22-AWS-Security-3]](images/aws-api-3.png){#fig:aws-define-security-group}
 
 #### EC2 Create Instance
 
-Now it was time to create the EC2 instance using the AWS Console: [Launch EC2](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#Instances:sort=instanceId)
+Now it was time to create an EC2 instance using the AWS Console: [Launch EC2](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#Instances:sort=instanceId)
 
-Click the 'Launch Instance' button:
+We clicked the 'Launch Instance' button:
 
-+@fig:aws-api-4
-[@fa18-516-22-AWS-EC2-1]
++@fig:launch-ec2 shows the AWS Console screen for launching an EC2 instance
 
-![AWS EC2 [@fa18-516-22-AWS-EC2-1]](images/aws-api-4.png){#fig:aws-api-4}
+![AWS EC2 [@fa18-516-22-AWS-EC2-1]](images/aws-api-4.png){#fig:launch-ec2}
 
-Select the Ubuntu version. In this case I used 18.04:
+We selected the Ubuntu version. We used version 18.04:
 
-+@fig:aws-api-5
-[@fa18-516-22-AWS-EC2-1]
++@fig:ec2-define-os shows the AWS screen used for selecting an EC2 operating system
 
-![AWS EC2 [@fa18-516-22-AWS-EC2-1]](images/aws-api-5.png){#fig:aws-api-5}
+![AWS EC2 OS [@fa18-516-22-AWS-EC2-1]](images/aws-api-5.png){#fig:ec2-define-os}
 
-Select a small instance type and go to "Next: Configure Instance Details:
+We selected a small instance type and went to "Next: Configure Instance Details:
 
-+@fig:aws-api-6
-[@fa18-516-22-AWS-EC2-1]
++@fig:ec2-select-type shows the AWS Console screen for selecting the type of instance
 
-![AWS EC2 [@fa18-516-22-AWS-EC2-1]](images/aws-api-6.png){#fig:aws-api-6}
+![AWS EC2 Type [@fa18-516-22-AWS-EC2-1]](images/aws-api-6.png){#fig:ec2-select-type}
 
-Make sure the default VPC is selected and then go to 'Configure Security Group':
+We made sure the default VPC is selected and then went to 'Configure Security Group':
 
-+@fig:aws-api-7
-[@fa18-516-22-AWS-EC2-1]
++@fig:ec2-configure-security shows the AWS Console screen for confirguring securty on an EC2 instance
 
-![AWS EC2 [@fa18-516-22-AWS-EC2-1]](images/aws-api-7.png){#fig:aws-api-7}
+![AWS EC2 Security Config [@fa18-516-22-AWS-EC2-1]](images/aws-api-7.png){#fig:ec2-configure-security}
 
-Click 'Select and existing security group' and select the group created earlier:
+Clicked 'Select and existing security group' and selected the group created earlier:
 
-+@fig:aws-api-8
-[@fa18-516-22-AWS-EC2-1]
++@fig:ec2-select-security shows the AWS Console screen for selecting a security group for EC2
 
-![AWS EC2 [@fa18-516-22-AWS-EC2-1]](images/aws-api-8.png){#fig:aws-api-8}
+![AWS EC2 Security Select [@fa18-516-22-AWS-EC2-1]](images/aws-api-8.png){#fig:ec2-select-security}
 
-You can now review and launch the instance.
+The EC2 instance could then be launched.
 
 #### EC2 SSH
 
-I then went into to my local Linux environment and set up a key pair to enable ssh to my EC2 instance. I did this using CLI and the following commands:
+We then went into to a local Linux environment and set up a key pair to enable ssh to our EC2 instance. We did this using CLI and the following commands:
 
 ```bash
 $ aws ec2 create-key-pair --key-name dlec2-key --query 'KeyMaterial' --output text > dlec2-key.pem
 ```
 
-Allow access to the key:
+Allowed access to the key:
 ```bash
 $ chmod 400 dlec2-key.pem
 ```
 
-Then locating the 'Public DNS' at: [AWS EC2](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#Instances:sort=instanceId), I connected to the EC2 instance with the following command:
+Then locating the 'Public DNS' at: [AWS EC2](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#Instances:sort=instanceId), we connected to the EC2 instance with the following command:
 
 ```bash
 $ ssh -i "dlec2-key.pem" ubuntu@ec2-18-191-50-79.us-east-2.compute.amazonaws.com
@@ -175,7 +184,7 @@ $ ssh -i "dlec2-key.pem" ubuntu@ec2-18-191-50-79.us-east-2.compute.amazonaws.com
 
 #### EC2 Set Up
 
-Now I needed to set up a Python virtual environment for my rest service:
+We then set up a Python virtual environment for our rest services:
 
 ```bash
 $ pyenv install -l
@@ -184,7 +193,7 @@ $ pyenv virtualenv 3.6.6 RestService
 $ pyenv activate RestService
 ```
 
-Install AWS CLI
+Installed AWS CLI
 
 ```bash
 $ pip install awscli
@@ -198,7 +207,7 @@ The following items had to be configured for CLI:
 
 ### Create S3 Storage
 
-In order to store analytical data and to backup my Jupyter notebooks I created to S3 buckets using the following commands:
+In order to store analytical data and to backup our Jupyter notebooks We created two S3 buckets using the following commands:
 
 ```bash
 $ aws s3 mb s3://e516-analytical-datasets --region us-east-2
@@ -209,7 +218,7 @@ $ aws s3 mb s3://e516-jupyter-backup --region us-east-2
 
 #### Install Java
 
-I used Codegen to create my rest service and Java ia a requirement. I installed Java using the following commands:
+We used Codegen to create our rest services and Java is a requirement. We installed Java using the following commands:
 
 ```bash
 $ sudo apt update
@@ -219,7 +228,7 @@ $ sudo apt install default-jdk
 
 #### Install Codegen
 
-I ran the following commands for installation:
+We ran the following commands for installation:
 
 ```bash
 $ mkdir ~/e516/swagger
@@ -227,7 +236,7 @@ $ cd ~/e516/swagger
 $ wget https://oss.sonatype.org/content/repositories/releases/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar
 ```
 
-I then opened the .bashrcls file and added an alias for codegen:
+We then opened the .bashrcls file and added an alias for codegen:
 
 ```bash
 alias swagger-codegen="java -jar ~/e516/swagger/swagger-codegen-cli-2.3.1.jar"
@@ -237,7 +246,7 @@ alias swagger-codegen="java -jar ~/e516/swagger/swagger-codegen-cli-2.3.1.jar"
 
 #### Swagger YAML Specs
 
-Using Swagger I built my API specs. This API has POST, DELETE, and GET methods. The POST method will create an AWS EMR cluster and install Jupyter Hub. The DELETE method allows for the termination of the cluster. The GET method retrieves information about the cluster including the status and a link to the Jupyter Hub web ui.
+Using Swagger we built my API specs. This API has POST, DELETE, and GET methods. The POST method will create an AWS EMR cluster and install JupyterHub. The DELETE method allows for the termination of the cluster. The GET method retrieves information about the cluster including the status and a link to the Jupyter Hub web ui.
 
 ```yaml
 swagger: "2.0"
