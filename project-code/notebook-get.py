@@ -1,28 +1,22 @@
 import boto3
 import json
-import subprocess
+import requests
 
 def search_nb_param_inpt_data(bucket, path, search_on):
 
+    path = path.replace('/', '%2f')
+    
     #call s3 API to get list of files including paths
-    cmd = 'curl -X GET '
-    cmd = cmd + 'http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8081'
-    cmd = cmd + '/api/s3?bucket=' + bucket + '&'
-    cmd = cmd + 'path=' + path + '&extension=.ipynb'
-
-    files = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE)
-
-    all_files = files.stdout.decode('utf-8')
-    all_files = all_files.rstrip()
-
-    return(all_files)
+    url = 'http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8081/api/s3'
+    payload = {'bucket': bucket, 'path': path, 'extension': '.ipynb'}  
+    r = requests.get(url, params=payload)
     
     s3 = boto3.resource('s3')
     
     #loop through all .ipynb under path
     nb_has_val = False
     nbs_found = []
-    for file_path in all_files:
+    for file_path in r.json():
 
         content_object = s3.Object(bucket, file_path)
         file_content = content_object.get()['Body'].read().decode('utf-8')
