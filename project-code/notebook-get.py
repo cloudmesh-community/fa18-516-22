@@ -9,12 +9,12 @@ def search_nb_param_inpt_data(bucket, path, search_on):
     cmd = cmd + 'http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8081'
     cmd = cmd + '/api/s3?bucket=' + bucket + '&'
     cmd = cmd + 'path=' + path + '&extension=.ipynb'
-    
+
     files = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE)
 
     all_files = files.stdout.decode('utf-8')
     all_files = all_files.rstrip()
-    
+
     return(all_files)
     
     s3 = boto3.resource('s3')
