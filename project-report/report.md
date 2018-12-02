@@ -365,7 +365,7 @@ We then navigated to our conroller file and edited it using nano:
 $ cd ~/emr-api/server/emr/flaskConnexion/swagger_server/controllers
 $ nano default_controller.py
 ```
-We then updated our POST, DELETE, and GET methods with the Python functions we created. The POST method will create an AWS EMR cluster, configure it and install JupyterHub. This includes setting up the security foor the EMR cluster and specifying S3 buckets for it to interact with. It returns a dictionary that includes the creaed cluster's ID, a link to the GET method for checking the status of the cluster, and a curl command for executing the DELETE method for terminating the cluster.
+We then updated our POST, DELETE, and GET methods with the Python functions we created. The POST method accepts a parameter indicating the number of instances desired in a cluster and will the create an AWS EMR cluster, configure it and install JupyterHub. This includes setting up the security foor the EMR cluster and specifying S3 buckets for it to interact with. It returns a dictionary that includes the creaed cluster's ID, a link to the GET method for checking the status of the cluster, and a curl command for executing the DELETE method for terminating the cluster.
 
 ```python
 import subprocess
@@ -452,6 +452,37 @@ def emr_get(cid):
 
      return rtn_dict
 ```
+Once the default_controller.py file was updated, we activated this rest service using the following commands.
+
+```bash
+$ cd ~/emr-api/server/emr/flaskConnexion
+$ pip install -r requirements.txt
+$ python setup.py install
+$ python -m swagger_server
+```
+
+The POST method could then be accessed using a curl command. In this case we will only specify two instances to be included in the cluster (the example output is incuded)
+
+```bash
+$ curl -X POST http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8080/api/emr/create/2
+{
+  "CheckClusterStatus": "http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8080/api/emr/info/j-3A70IXQPD60HK",
+  "ClusterId": "j-3A70IXQPD60HK",
+  "TerminateCluster": "curl -X DELETE http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8080/api/emr/terminate/j-3A70IXQPD60HK"
+}
+```
+
+The CheckClusterStatus url can the be used in a web browser to check the cluster's status.
+
+<br>
+
++@fig:emr-get-output shows the results of executing the GET method for the EMR API
+
+![EMR API GET](images/aws-api-9.png){#fig:emr-get-output}
+
+<br>
+
+
 
 
 
