@@ -116,8 +116,8 @@ Navigating to: [EC2 Security Group](https://us-east-2.console.aws.amazon.com/ec2
 +@fig:aws-create-security-groups shows the screen to create an AWS security group
 
 ![AWS Security [@fa18-516-22-AWS-Security-2]](images/aws-api-2.png){#fig:aws-create-security-groups}
-&nbsp;
-&nbsp;
+</br>
+</br>
 We then gave the security group a name, selected the default VPC and added two rules. One that opens ports 8080, 8081, and 8082 for http traffic and one to allow ssh access from a single ip. Ports 8080, 8081, and 8082 will be used for accessing the APIs.
 
 +@fig:aws-define-security-group shows the AWS screen for defining a security group
