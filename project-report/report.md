@@ -27,13 +27,13 @@ Specifically, this project involves building an API for the creation of an AWS E
 
 The project architecture can be visualized as follows:
 
-<br><br>
+<br>
 
 +@fig:project-architecture shows the proposed architecture for this project
 
 ![Project Architecture](images/aws-api-0.png){#fig:project-architecture}
 
-<br><br>
+<br>
 
 ## Introduction
 
@@ -105,13 +105,13 @@ $ aws iam attach-group-policy --group-name Admins --policy-arn arn:aws:iam::aws:
 
 Then through the [AWS Console](https://console.aws.amazon.com/iam/home?region=us-east-2#/groups) we assigned users to the admin group. Under 'Group Actions', we selected 'Add Users to Group'.
 
-<br><br>
+<br>
 
 +@fig:aws-admin-access shows the AWS Console screen for adding users to a admin security group
 
 ![AWS Security [@fa18-516-22-AWS-Security-1]](images/aws-api-1.png){#fig:aws-admin-access}
 
-<br><br>
+<br>
 
 ### Creating and Configuring EC2 Instance to Host API
 
@@ -121,75 +121,75 @@ To set up the EC2 instance for hosting our APIs we first used the Amazon Console
 
 Navigating to: [EC2 Security Group](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#SecurityGroups:sort=groupId) we selected 'Create Security Group'
 
-<br><br>
+<br>
 
 +@fig:aws-create-security-groups shows the screen to create an AWS security group
 
 ![AWS Security [@fa18-516-22-AWS-Security-2]](images/aws-api-2.png){#fig:aws-create-security-groups}
 
-<br><br>
+<br>
 
 We then gave the security group a name, selected the default VPC and added two rules. One that opens ports 8080, 8081, and 8082 for http traffic and one to allow ssh access from a single ip. Ports 8080, 8081, and 8082 will be used for accessing the APIs.
 
-<br><br>
+<br>
 
 +@fig:aws-define-security-group shows the AWS screen for defining a security group
 
 ![AWS Security [@fa18-516-22-AWS-Security-3]](images/aws-api-3.png){#fig:aws-define-security-group}
 
-<br><br>
+<br>
 
 #### EC2 Create Instance
 
 Now it was time to create an EC2 instance using the AWS Console: [Launch EC2](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#Instances:sort=instanceId). We clicked the 'Launch Instance' button.
 
-<br><br>
+<br>
 
 +@fig:launch-ec2 shows the AWS Console screen for launching an EC2 instance
 
 ![AWS EC2 [@fa18-516-22-AWS-EC2-1]](images/aws-api-4.png){#fig:launch-ec2}
 
-<br><br>
+<br>
 
 We selected the Ubuntu version, using version 18.04:
 
-<br><br>
+<br>
 
 +@fig:ec2-define-os shows the AWS screen used for selecting an EC2 operating system
 
 ![AWS EC2 OS [@fa18-516-22-AWS-EC2-1]](images/aws-api-5.png){#fig:ec2-define-os}
 
-<br><br>
+<br>
 
 We selected a small instance type and went to "Next: Configure Instance Details.
 
-<br><br>
+<br>
 
 +@fig:ec2-select-type shows the AWS Console screen for selecting the type of instance
 
 ![AWS EC2 Type [@fa18-516-22-AWS-EC2-1]](images/aws-api-6.png){#fig:ec2-select-type}
 
-<br><br>
+<br>
 
 We made sure the default VPC is selected and then went to 'Configure Security Group'.
 
-<br><br>
+<br>
 
 +@fig:ec2-configure-security shows the AWS Console screen for confirguring securty on an EC2 instance
 
 ![AWS EC2 Security Config [@fa18-516-22-AWS-EC2-1]](images/aws-api-7.png){#fig:ec2-configure-security}
 
-<br><br>
+<br>
 
 We clicked 'Select and existing security group' and selected the group created earlier.
 
-<br><br>
+<br>
 
 +@fig:ec2-select-security shows the AWS Console screen for selecting a security group for EC2
 
 ![AWS EC2 Security Select [@fa18-516-22-AWS-EC2-1]](images/aws-api-8.png){#fig:ec2-select-security}
 
-<br><br>
+<br>
 
 The EC2 instance could then be launched.
 
