@@ -67,3 +67,10 @@
 * Completed a significant amount on my project report
 * Started working on an API to interact with S3
 
+# Week Fri 11/30/19 - 12/06/18
+
+* Finished my S3 API
+* Built a Notebook API
+* Completed the project report
+* Started working on an API to interact with S3
+
