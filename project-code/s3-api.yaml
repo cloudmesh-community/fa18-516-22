@@ -1,0 +1,52 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: "s3info"
+  description: "API to query S3 bucket by file extension"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    name: "S3 Rest Service"
+  license:
+    name: "Apache"
+host: 18.191.50.79:8081
+basePath: /api
+schemes:
+  - http
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+  /s3/{bucket}/folder/{path}/file/{extension}:
+    post:
+      summary: Create EMR cluster.
+      parameters:
+        - in: path
+          name: bucket
+          required: true
+          type: string
+          minimum: 1
+          description: The S3 bucket name
+        - in: path
+          name: path
+          required: true
+          type: string
+          minimum: 1
+          description: The folder path to query
+        - in: path
+          name: extension
+          required: true
+          type: string
+          minimum: 1
+          description: The file extension to search for
+      responses:
+        200:
+          description: OK
+definitions:
+  S3:
+    type: "object"
+    required:
+      - "model"
+    properties:
+      model:
+        type: "string"
