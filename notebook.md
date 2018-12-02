@@ -72,5 +72,3 @@
 * Finished my S3 API
 * Built a Notebook API
 * Completed the project report
-* Started working on an API to interact with S3
-
