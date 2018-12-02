@@ -708,7 +708,7 @@ $ python setup.py install
 $ python -m swagger_server
 ```
 
-The API can be used to query the contents of Jupyter notebooks. In the example below we query the S3 bucket 'e561-jupyter-backup' and specify a path of 'jupyter'. We also specify to search the parameter cells for 'test1/iris.csv'. This text relates to a dataset that is stored on S3. In this way a user could query a set of analytical notebooks to see who is perforiming ananlysis using a particular dataset. The service returns a list of files (including the path) that meet the specifications.
+The API can be used to query the contents of Jupyter notebooks. In the example below we query the S3 bucket 'e561-jupyter-backup' and specify a path of 'jupyter'. We also specify to search the parameter cells for 'test1/iris.csv'. This text relates to a dataset that is stored on S3. In this way a user could query a set of analytical notebooks to see who is performing analysis using a particular dataset. The service returns a list of files (including the path) that meet the specifications.
 
 +@fig:notebook-get shows the results of executing the GET method for the Notebook API
 
