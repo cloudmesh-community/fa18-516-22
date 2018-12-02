@@ -15,7 +15,7 @@ Keywords: AWS, Open API, EC2, EMR, Jupyter, S3
 
 **:mortar_board: Learning Objectives**
 
-* Use an Open API to interact with various AWS products
+* Use Open API to interact with various AWS products
 * Learn to deploy an AWS EMR Cluster
 * Interact with Jupyter notebooks stored in S3 buckets
 
@@ -313,7 +313,56 @@ definitions:
 
 #### Deploy EMR Rest Service
 
+As mentioned, we used Swagger Codegen for the creation of our APIs. Once our swagger yaml files was cloned to our EC2 instance we ran the following code to create the needed files:
 
+```bash
+$ swagger-codegen generate \
+    -i ~/fa18-516-22/project-code/emr-api.yaml \
+    -l python-flask \
+    -o ~/emr-api/server/emr/flaskConnexion \
+    -D supportPython3=true
+```
+
+We then navigated to our conroller file and edited it using nano:
+
+```bash
+$ cd ~/emr-api/server/emr/flaskConnexion/swagger_server/controllers
+$ nano default_controller.py
+```
+We then updated our POST, DELETE, and GET methods with the Python functions we created. The POST method will create an AWS EMR cluster, configure it and install JupyterHub. This includes setting up the security foor the EMR cluster and specifying S3 buckets for it to interact with. It returns a dictionary that includes the creaed cluster's ID, a link to the GET method for checking the status of the cluster, and a curl command for executing the DELETE method for terminating the cluster.
+
+```python
+import subprocess
+
+def emr_post(num_nodes):
+
+   aws_cmd = "aws emr create-cluster --name=\'E516-JupyterHub-Cluster\'"
+   aws_cmd = aws_cmd + " --release-label emr-5.19.0"
+   aws_cmd = aws_cmd + " --applications Name=JupyterHub"
+   aws_cmd = aws_cmd + " --log-uri s3://e516-jupyterhub-backup/JupyterClusterLogs"
+   aws_cmd = aws_cmd + " --use-default-roles"
+   aws_cmd = aws_cmd + " --ec2-attributes SubnetIds=subnet-d0169eaa,KeyName=dlec2-key,AdditionalMasterSecurityGroups=[\'sg-01c1d97ca12d1f2e7\']"
+   aws_cmd = aws_cmd + " --instance-count " + str(num_nodes)
+   aws_cmd = aws_cmd + " --instance-type m4.large"
+   aws_cmd = aws_cmd + " --configurations \'[{\"Classification\":\"jupyter-s3-conf\",\"Properties\":{\"s3.persistence.bucket\":\"e516-jupyter-backup\",\"s3.persistence.enabled\":\"true\"},\"Configurations\":[]}]\'"
+   aws_cmd = aws_cmd + " --output text"
+
+   c_id = subprocess.run(aws_cmd, shell=True, stdout=subprocess.PIPE)
+
+   cid = c_id.stdout.decode('utf-8')
+   cid = cid.rstrip()
+
+   c_status = "http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8080/api/emr/info/" + cid
+   t_clstr = 'curl -X "DELETE" http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8080/api/emr/terminate/' + cid
+
+   rtn_dict = {
+      "ClusterId": cid,
+      "CheckClusterStatus": c_status,
+      "TerminateCluster": t_clstr
+   }
+
+   return rtn_dict
+```
 
 
 
