@@ -551,7 +551,7 @@ $ cd ~/s3-api/
 $ find . -type f -exec sed -i 's/8080/8081/g' {} +
 ```
 
-The default_cntroller.py file was then edited with the following Python code. This function used the Amazon 'boto3' package to search a specifed S3 bucket and path for a given file extension. It then returns a list of all files that meet the specifications.
+The default_controller.py file was then edited with the following Python code. This function used the Amazon 'boto3' package to search a specifed S3 bucket and path for a given file extension. It then returns a list of all files that meet the specifications.
 
 ```python
 import boto3
@@ -585,7 +585,7 @@ The API can be used to query a specified S3 bucket. In the example below we quer
 
 <br>
 
-#### Deploy S3 Rest Service
+#### Deploy Notebook Rest Service
 
 Our final API is a service that allows for the searching of Jupyter notebook content. This API also connects to the S3 API as an abstraction layer.
 
