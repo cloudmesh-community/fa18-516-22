@@ -5,14 +5,14 @@ import requests
 def search_nb_param_inpt_data(bucket, path, search_on):
 
     path = path.replace('/', '%2f')
-    
+
     #call s3 API to get list of files including paths
     url = 'http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8081/api/s3'
     payload = {'bucket': bucket, 'path': path, 'extension': '.ipynb'}  
     r = requests.get(url, params=payload)
-    
+
     s3 = boto3.resource('s3')
-    
+
     #loop through all .ipynb under path
     nb_has_val = False
     nbs_found = []
@@ -32,5 +32,5 @@ def search_nb_param_inpt_data(bucket, path, search_on):
                                 nbs_found.append('s3://' + bucket + '/' + file_path)
                             
     rtn_nb_full_path_list = list(set(nbs_found))
-    
+
     return(rtn_nb_full_path_list)
