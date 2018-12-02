@@ -19,7 +19,7 @@ produces:
 paths:
   /s3/{bucket}/folder/{path}/file/{extension}:
     get:
-      summary: Create EMR cluster.
+      summary: Get a list of files and paths with the given file extension
       parameters:
         - in: path
           name: bucket
