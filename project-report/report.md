@@ -462,7 +462,7 @@ The CheckClusterStatus url can then be used in a web browser to check the cluste
 
 <br>
 
-Once the cluster is started the JupyterHub web interface can be accessed through the given url. The EMR API configured the cluster to store created notebook to S#, so when the cluster is terminated the notebooks will still be persisted. In addition, each time the POST method is used to create an EMR cluster any persisted notebooks will be available to the user.
+Once the cluster is started, the JupyterHub web interface can be accessed through the given url. The EMR API configured the cluster to store created notebook to S3, so when the cluster is terminated the notebooks will still be persisted. In addition, each time the POST method is used to create an EMR cluster any persisted notebooks will be available to the user in JupyterHub.
 
 The DELETE method can be used in a curl command to terminate the cluster.
 
@@ -473,23 +473,17 @@ $ curl -X DELETE http://ec2-18-191-50-79.us-east-2.compute.amazonaws.com:8080/ap
   "ClusterId": "j-3A70IXQPD60HK",
   "Status": "TERMINATING"
 }
+```
 
-Using the GET method once again, shows that the cluster has been terminated
+Using the GET method shows that the cluster has been terminated
 
 +@fig:emr-get-output-results shows the results of executing the GET method for the EMR API
 
-![EMR API GET](images/aws-api-10.png){#fig:emr-get-output-results}
+![EMR API GET Results](images/aws-api-10.png){#fig:emr-get-output-results}
 
 <br>
 
 #### Deploy S3 Rest Service
-
-
-
-
-
-
-
 
 
 
