@@ -29,7 +29,7 @@ The project architecture can be visualized as follows:
 
 +@fig:project-architecture shows the proposed architecture for this project
 
-![Project Architecture](images/aws-api-0.png){#fig:project-architecture}
+![Project Architecture](images/fa18-516-22-aws-api-0.png){#fig:project-architecture}
 
 ## Introduction
 
@@ -105,7 +105,7 @@ Then through the [AWS Console](https://console.aws.amazon.com/iam/home?region=us
 
 +@fig:aws-admin-access shows the AWS Console screen for adding users to a admin security group
 
-![AWS Security [@fa18-516-22-AWS-Security-1]](images/aws-api-1.png){#fig:aws-admin-access}
+![AWS Security [@fa18-516-22-AWS-Security-1]](images/fa18-516-22-aws-api-1.png){#fig:aws-admin-access}
 
 ### Creating and Configuring EC2 Instance to Host API
 
@@ -117,14 +117,14 @@ Navigating to: [EC2 Security Group](https://us-east-2.console.aws.amazon.com/ec2
 
 +@fig:aws-create-security-groups shows the screen to create an AWS security group
 
-![AWS Security [@fa18-516-22-AWS-Security-2]](images/aws-api-2.png){#fig:aws-create-security-groups}
+![AWS Security [@fa18-516-22-AWS-Security-2]](images/fa18-516-22-aws-api-2.png){#fig:aws-create-security-groups}
 
 
 We then gave the security group a name, selected the default VPC and added two rules. One that opens ports 8080, 8081, and 8082 for http traffic and one to allow ssh access from a single ip. Ports 8080, 8081, and 8082 will be used for accessing the APIs.
 
 +@fig:aws-define-security-group shows the AWS screen for defining a security group
 
-![AWS Security [@fa18-516-22-AWS-Security-3]](images/aws-api-3.png){#fig:aws-define-security-group}
+![AWS Security [@fa18-516-22-AWS-Security-3]](images/fa18-516-22-aws-api-3.png){#fig:aws-define-security-group}
 
 #### EC2 Create Instance
 
@@ -132,31 +132,31 @@ Now it was time to create an EC2 instance using the AWS Console: [Launch EC2](ht
 
 +@fig:launch-ec2 shows the AWS Console screen for launching an EC2 instance
 
-![AWS EC2 [@fa18-516-22-AWS-EC2-1]](images/aws-api-4.png){#fig:launch-ec2}
+![AWS EC2 [@fa18-516-22-AWS-EC2-1]](images/fa18-516-22-aws-api-4.png){#fig:launch-ec2}
 
 We selected the Ubuntu version, using version 18.04:
 
 +@fig:ec2-define-os shows the AWS screen used for selecting an EC2 operating system
 
-![AWS EC2 OS [@fa18-516-22-AWS-EC2-1]](images/aws-api-5.png){#fig:ec2-define-os}
+![AWS EC2 OS [@fa18-516-22-AWS-EC2-1]](images/fa18-516-22-aws-api-5.png){#fig:ec2-define-os}
 
 We selected a small instance type and went to "Next: Configure Instance Details.
 
 +@fig:ec2-select-type shows the AWS Console screen for selecting the type of instance
 
-![AWS EC2 Type [@fa18-516-22-AWS-EC2-1]](images/aws-api-6.png){#fig:ec2-select-type}
+![AWS EC2 Type [@fa18-516-22-AWS-EC2-1]](images/fa18-516-22-aws-api-6.png){#fig:ec2-select-type}
 
 We made sure the default VPC is selected and then went to 'Configure Security Group'.
 
 +@fig:ec2-configure-security shows the AWS Console screen for confirguring securty on an EC2 instance
 
-![AWS EC2 Security Config [@fa18-516-22-AWS-EC2-1]](images/aws-api-7.png){#fig:ec2-configure-security}
+![AWS EC2 Security Config [@fa18-516-22-AWS-EC2-1]](images/fa18-516-22-aws-api-7.png){#fig:ec2-configure-security}
 
 We clicked 'Select and existing security group' and selected the group created earlier.
 
 +@fig:ec2-select-security shows the AWS Console screen for selecting a security group for EC2
 
-![AWS EC2 Security Select [@fa18-516-22-AWS-EC2-1]](images/aws-api-8.png){#fig:ec2-select-security}
+![AWS EC2 Security Select [@fa18-516-22-AWS-EC2-1]](images/fa18-516-22-aws-api-8.png){#fig:ec2-select-security}
 
 The EC2 instance could then be launched.
 
@@ -443,7 +443,7 @@ The CheckClusterStatus url can then be used in a web browser to check the cluste
 
 +@fig:emr-get-output shows the results of executing the GET method for the EMR API
 
-![EMR API GET](images/aws-api-9.png){#fig:emr-get-output}
+![EMR API GET](images/fa18-516-22-aws-api-9.png){#fig:emr-get-output}
 
 Once the cluster is started, the JupyterHub web interface can be accessed through the given url. The EMR API configured the cluster to store created notebook to S3, so when the cluster is terminated the notebooks will still be persisted. In addition, each time the POST method is used to create an EMR cluster any persisted notebooks will be available to the user in JupyterHub.
 
@@ -462,7 +462,7 @@ Using the GET method shows that the cluster has been terminated
 
 +@fig:emr-get-output-results shows the results of executing the GET method for the EMR API
 
-![EMR API GET Results](images/aws-api-10.png){#fig:emr-get-output-results}
+![EMR API GET Results](images/fa18-516-22-aws-api-10.png){#fig:emr-get-output-results}
 
 ### Deploy S3 Rest Service
 
@@ -560,7 +560,7 @@ The API can be used to query a specified S3 bucket. In the example below we quer
 
 +@fig:s3-get shows the results of executing the GET method for the S3 API
 
-![S3 API GET](images/aws-api-11.png){#fig:s3-get}
+![S3 API GET](images/fa18-516-22-aws-api-11.png){#fig:s3-get}
 
 ### Deploy Notebook Rest Service
 
@@ -570,7 +570,7 @@ Jupyter notebooks allow for custom tagging on individual 'cells'. These tags are
 
 +@fig:notebook-tag shows an example of a Jupyter notebook tag
 
-![Notebook Tag](images/aws-api-12.png){#fig:notebook-tag}
+![Notebook Tag](images/fa18-516-22-aws-api-12.png){#fig:notebook-tag}
 
 Once again we used Swagger for the API specifications. This service has a GET method that accepts parameters for an S3 bucket, a path, and a text field to search for in the notebooks. The Swagger specifications are provided below.
 
@@ -687,7 +687,7 @@ The API can be used to query the contents of Jupyter notebooks. In the example b
 
 +@fig:notebook-get shows the results of executing the GET method for the Notebook API
 
-![Notebook API GET](images/aws-api-13.png){#fig:notebook-get}
+![Notebook API GET](images/fa18-516-22-aws-api-13.png){#fig:notebook-get}
 
 ### Running all APIs
 
