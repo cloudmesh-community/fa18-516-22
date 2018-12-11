@@ -124,7 +124,7 @@ We then gave the security group a name, selected the default VPC and added two r
 
 +@fig:aws-define-security-group shows the AWS screen for defining a security group
 
-![AWS Security [@fa18-516-22-AWS-Security-3]](images/fa18-516-22-aws-api-3.png){#fig:aws-define-security-group}
+![AWS Security [@fa18-516-22-AWS-Security-2]](images/fa18-516-22-aws-api-3.png){#fig:aws-define-security-group}
 
 #### EC2 Create Instance
 
